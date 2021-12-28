@@ -1,0 +1,33 @@
+.right-menu {
+  color: #5e6278;
+  font-weight: 500;
+}
+.right-menu:hover {
+  transition: color 0.2s ease, background-color 0.2s ease;
+  background-color: #135b9e;
+  color: #ffffff;
+  border-radius: 0.475rem;
+}
+
+.header-menu-background {
+  background-color: #f5f8fa;
+}
+
+.header {
+  height: 80px;
+}
+
+.menu-title-gray-700 .menu-item :hover {
+  color: white !important;
+  background-color: #135b9e !important;
+}
+.menu-title-gray-700 .menu-item .menu-link .menu-title {
+  color: #5e6278 !important;
+}
+.menu-title-gray-700 .menu-item .menu-link .menu-title :hover {
+  color: white !important;
+}
+
+.svg-icon svg [fill]:not(.permanent):not(g) {
+  fill: #135b9e !important;
+}

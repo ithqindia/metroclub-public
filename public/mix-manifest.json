@@ -1,4 +1,9 @@
 {
     "/dist/js/vue2.js": "/dist/js/vue2.js",
-    "/dist/js/about.js": "/dist/js/about.js"
+    "/dist/css/custom.css": "/dist/css/custom.css",
+    "/dist/css/style.bundle.css": "/dist/css/style.bundle.css",
+    "/dist/css/style.bundle.css.map": "/dist/css/style.bundle.css.map",
+    "/dist/js/.DS_Store": "/dist/js/.DS_Store",
+    "/dist/js/scripts.bundle.js": "/dist/js/scripts.bundle.js",
+    "/dist/js/scripts.bundle.js.map": "/dist/js/scripts.bundle.js.map"
 }
