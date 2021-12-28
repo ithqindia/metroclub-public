@@ -1,10 +1,9 @@
 {
-    "/dist/js/vue2.js": "/dist/js/vue2.js",
-    "/dist/js/about.js": "/dist/js/about.js",
-    "/dist/css/custom.css": "/dist/css/custom.css",
-    "/dist/css/style.bundle.css": "/dist/css/style.bundle.css",
-    "/dist/css/style.bundle.css.map": "/dist/css/style.bundle.css.map",
-    "/dist/js/.DS_Store": "/dist/js/.DS_Store",
-    "/dist/js/scripts.bundle.js": "/dist/js/scripts.bundle.js",
-    "/dist/js/scripts.bundle.js.map": "/dist/js/scripts.bundle.js.map"
+    "/dist/js/search-app.js": "/dist/js/search-app.js?id=d3fdf169ff92a837c724",
+    "/dist/css/custom.css": "/dist/css/custom.css?id=6ec188148b9a19097e7e",
+    "/dist/css/style.bundle.css": "/dist/css/style.bundle.css?id=b8bdf83a069dfbaec81d",
+    "/dist/css/style.bundle.css.map": "/dist/css/style.bundle.css.map?id=8263cc8df1d1ca1d81ec",
+    "/dist/js/.DS_Store": "/dist/js/.DS_Store?id=43ec88eb1cdc8011d9e3",
+    "/dist/js/scripts.bundle.js": "/dist/js/scripts.bundle.js?id=f7e1d620e6715338b503",
+    "/dist/js/scripts.bundle.js.map": "/dist/js/scripts.bundle.js.map?id=8ae07eeeae2e9e42c253"
 }

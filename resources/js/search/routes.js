@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Search from "../views/Search.vue";
-import Universities from "../views/Universities.vue";
+import Search from "./views/Search.vue";
+import Universities from "./views/Universities.vue";
 
 Vue.use(VueRouter);
 

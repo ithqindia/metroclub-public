@@ -1,6 +1,6 @@
 import Vue from "vue";
 import App from "./SearchApp.vue";
-import router from "./router";
+import router from "./routes";
 import store from "./store";
 
 import vSelect from "vue-select";

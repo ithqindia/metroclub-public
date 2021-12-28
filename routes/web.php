@@ -28,3 +28,7 @@ Route::get('/vue2', function () {
 Route::get('/test2', function () {
     return view('frontend.test2');
 });
+
+Route::get('/search', function () {
+    return view('frontend.search');
+});
