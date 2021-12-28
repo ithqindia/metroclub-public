@@ -18,7 +18,7 @@
         </div>
         <div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
             <a href="/">
-                <img alt="Logo" src="/website/media/logos/logo.png" class="h-80px">
+                <img alt="Logo" src="/logos/logo.png" class="h-80px">
             </a>
         </div>
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">

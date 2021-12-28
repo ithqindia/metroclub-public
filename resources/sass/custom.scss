@@ -1,0 +1,43 @@
+$brand-color: #135b9e;
+$menu-item-color: #5e6278;
+
+.right-menu {
+  color: $menu-item-color;
+  font-weight: 500;
+
+  &:hover {
+    transition: color 0.2s ease, background-color 0.2s ease;
+    background-color: $brand-color;
+    color: #ffffff;
+    border-radius: 0.475rem;
+  }
+}
+
+.header-menu-background {
+  background-color: #f5f8fa;
+}
+
+.header {
+  height: 80px;
+}
+
+.menu-title-gray-700 {
+  .menu-item {
+    :hover {
+      color: white !important;
+      background-color: $brand-color !important;
+    }
+    .menu-link {
+      .menu-title {
+        :hover {
+          color: white !important;
+        }
+        color: $menu-item-color !important;
+      }
+    }
+  }
+}
+
+.svg-icon svg [fill]:not(.permanent):not(g) {
+  fill: $brand-color !important;
+}
