@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
-
 import _ from "lodash";
+import Axios from "axios";
 
 Vue.use(Vuex);
 
@@ -26,6 +26,13 @@ export default new Vuex.Store({
     country(state) {
       return state.country;
     },
+
+    universities(state) {
+      if (state.universities) {
+        return state.universities;
+      }
+      return null;
+    },
   },
   mutations: {
     setCountry(state, item) {
@@ -39,7 +46,42 @@ export default new Vuex.Store({
     setCourseTag(state, tags) {
       state.courseTags = _.values(tags).join("|");
     },
+
+    setUniversities(state, universities) {
+      console.log("ng-aw ~ file: store.js ~ line 51 ~ setUniversities ~ universities", universities);
+      state.universities = universities;
+    },
   },
-  actions: {},
+  actions: {
+    async fetchUniversities({ commit }) {
+      try {
+        Axios.get(
+          `/api/v1/universities/${this.state.country}/${this.state.levelOfStudy}/${this.state.courseTags}/all`
+        ).then((res) => {
+          commit("setUniversities", res.data);
+          console.log(
+            "ng-aw ~ file: Universities.vue ~ line 33 ~ ).then ~ res.data",
+            res.data
+          );
+        });
+      } catch (err) {
+        console.log(
+          "ng-aw ~ file: store.js ~ line 67 ~ fetchUniversities ~ err",
+          err
+        );
+      }
+
+      // //make some kind of ajax request
+      // try {
+      //   await doAjaxRequest(payload);
+      //   // can commit multiple mutations in an action
+      //   commit("setUniversities", payload);
+      //   commit("INCREMENT_USER_POSTS_COUNT");
+      // } catch (err) {
+      //   console.log("ng-aw ~ file: store.js ~ line 62 ~ fetchUniversities ~ err", err);
+      //   // commit("INSERT_ERROR", error);
+      // }
+    },
+  },
   plugins: [createPersistedState()],
 });
