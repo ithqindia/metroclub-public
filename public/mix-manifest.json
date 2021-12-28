@@ -1,5 +1,4 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/vue2.js": "/vue2.js",
-    "/js/about.js": "/js/about.js"
+    "/dist/js/vue2.js": "/dist/js/vue2.js",
+    "/dist/js/about.js": "/dist/js/about.js"
 }
