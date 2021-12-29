@@ -48,8 +48,15 @@ export default new Vuex.Store({
     },
 
     setUniversities(state, universities) {
-      console.log("ng-aw ~ file: store.js ~ line 51 ~ setUniversities ~ universities", universities);
+      console.log(
+        "ng-aw ~ file: store.js ~ line 51 ~ setUniversities ~ universities",
+        universities
+      );
       state.universities = universities;
+    },
+
+    setErrors(state, err) {
+      state.errors = err;
     },
   },
   actions: {
@@ -59,16 +66,13 @@ export default new Vuex.Store({
           `/api/v1/universities/${this.state.country}/${this.state.levelOfStudy}/${this.state.courseTags}/all`
         ).then((res) => {
           commit("setUniversities", res.data);
-          console.log(
-            "ng-aw ~ file: Universities.vue ~ line 33 ~ ).then ~ res.data",
-            res.data
-          );
         });
       } catch (err) {
         console.log(
           "ng-aw ~ file: store.js ~ line 67 ~ fetchUniversities ~ err",
           err
         );
+        commit("setErrors", err);
       }
 
       // //make some kind of ajax request

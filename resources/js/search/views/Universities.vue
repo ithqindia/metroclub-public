@@ -1,16 +1,22 @@
 <template>
   <div class="mt-5">
-    <h1>Universities</h1>
-    <p>levelOfStudy {{ levelOfStudy }}</p>
-    <p>courseTags {{ courseTags }}</p>
-    <p>country {{ country }}</p>
+    <h1>{{ universities.length }} Universities found</h1>
 
-    {{ universities }}
+    <i class="bi bi-heart fs-3"></i>
+    <!-- {{ universities }} -->
+    <div class="" style="display: flex; flex-wrap: wrap">
+      <university-card
+        v-for="university in universities"
+        :key="university.uuid"
+        :university="university"
+      ></university-card>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import UniversityCard from "../components/UniversityCard.vue";
 
 export default {
   computed: {
@@ -19,6 +25,9 @@ export default {
   mounted() {
     console.log("fetching universtiies");
     this.$store.dispatch("fetchUniversities");
+  },
+  components: {
+    "university-card": UniversityCard,
   },
 };
 </script>
