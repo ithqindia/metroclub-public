@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-4 col-sm-6 col-xs-12">
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <div style="border: 1px solid #c0c0c0; margin: 10px">
       <div class="overlay">
         <div
@@ -15,24 +15,13 @@
         </div>
       </div>
 
-      <div class="content" style="padding: 10px">
-        <div
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            line-clamp: 1;
-            -webkit-box-orient: vertical;
-          "
+      <div class="content" style="padding: 10px;">
+        <a
+          href="#"
+          class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base"
         >
-          <a
-            href="#"
-            class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base"
-          >
-            {{ university.name }}
-          </a>
-        </div>
+          {{ university.name }}
+        </a>
         <p
           style="
             overflow: hidden;
