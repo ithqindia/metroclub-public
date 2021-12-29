@@ -48,10 +48,9 @@
 
 <script>
 import Axios from "axios";
+import _ from "lodash";
 
 export default {
-  created() {},
-
   data() {
     return {
       countries: null,
@@ -65,7 +64,6 @@ export default {
     };
   },
   mounted() {
-    this.getLocalStorage();
     Axios.get("/api/v1/countries").then((res) => {
       this.countries = res.data;
     });
@@ -75,13 +73,14 @@ export default {
     Axios.get("api/v1/course-tags").then((res) => {
       this.courseTags = res.data;
     });
+    this.getLocalStorage();
   },
   methods: {
     searchUniversities() {
       this.$store.commit("setCountry", this.formData.country);
       this.$store.commit("setLevelOfStudy", this.formData.levelOfStudy);
       this.$store.commit("setCourseTag", this.formData.courseTags);
-      // this.$router.push("universities");
+      this.$router.push("universities");
     },
 
     setLocalStorage() {
@@ -95,8 +94,15 @@ export default {
         } catch (e) {
           return null;
         }
+        console.log(
+          "ng-aw ~ file: Search.vue ~ line 99 ~ getLocalStorage ~ storedForm",
+          storedForm
+        );
         if (storedForm) {
           this.formData = storedForm;
+          this.formData.courseTags = storedForm.courseTags
+            .split("|")
+            .map((item) => Number(item));
         }
       }
       return null;

@@ -2,10 +2,15 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\UniversityController;
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Route::get('/search', [SearchController::class, 'index']);
 
@@ -32,3 +37,15 @@ Route::get('/test2', function () {
 Route::get('/search', function () {
     return view('frontend.search');
 });
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
+    Route::resource('/web/v1/wishlist/university', WishlistController::class);
+    Route::resource('/web/v1/comment', CommentController::class);
+});
+
+Route::resource(
+    '/web/v1/universities/{country}/{major}/{tags}/all',
+    UniversityController::class,
+    ['only' => ['index', 'show']]
+);

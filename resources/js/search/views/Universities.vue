@@ -1,10 +1,7 @@
 <template>
   <div class="mt-5">
     <h1>{{ universities.length }} Universities found</h1>
-
-    <i class="bi bi-heart fs-3"></i>
-    <!-- {{ universities }} -->
-    <div class="" style="display: flex; flex-wrap: wrap">
+    <div style="display: flex; flex-wrap: wrap">
       <university-card
         v-for="university in universities"
         :key="university.uuid"

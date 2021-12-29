@@ -71,6 +71,42 @@
             </p>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <strong>col-12</strong>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi voluptatem, nulla, et odit nisi
+            asperiores laborum vero eaque magni a, quidem doloremque nam reprehenderit esse nemo. Exercitationem, nemo
+            reiciendis!
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 col-sm-12">
+            <strong>col-6 col-sm-12</strong>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi voluptatem, nulla, et odit nisi
+            asperiores laborum vero eaque magni a, quidem doloremque nam reprehenderit esse nemo. Exercitationem, nemo
+            reiciendis!
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 col-sm-12 col-md-6">
+            <strong>col-6 col-sm-12 col-md-6</strong>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi voluptatem, nulla, et odit nisi
+            asperiores laborum vero eaque magni a, quidem doloremque nam reprehenderit esse nemo. Exercitationem, nemo
+            reiciendis!
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 col-sm-12 col-md-12 col-lg-12">
+            <strong>col-12</strong>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi voluptatem, nulla, et odit nisi
+            asperiores laborum vero eaque magni a, quidem doloremque nam reprehenderit esse nemo. Exercitationem, nemo
+            reiciendis!
+        </div>
+    </div>
 @endsection
 
 @section('scripts')

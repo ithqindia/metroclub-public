@@ -1612,3 +1612,19 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?38c4d2499557ae0379fd160e1
   color: white;
   background-color: #e23611 !important;
 }
+
+.text-brand {
+  color: #135b9e;
+}
+
+.text-brand-secondary {
+  color: #f05736;
+}
+
+.bg-brand {
+  background-color: #135b9e;
+}
+
+.bg-brand-secondary {
+  background-color: #f05736;
+}

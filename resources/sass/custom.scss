@@ -1,6 +1,8 @@
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 $brand-color: #135b9e;
+$brand-color-secondary: #f05736;
+
 $menu-item-color: #5e6278;
 
 .right-menu {
@@ -61,7 +63,7 @@ $menu-item-color: #5e6278;
 }
 
 .btn.btn-secondary {
-  background-color: #f05736;
+  background-color: $brand-color-secondary;
   color: white;
   &:hover {
     &:not(.btn-active) {
@@ -69,4 +71,19 @@ $menu-item-color: #5e6278;
       background-color: #e23611 !important;
     }
   }
+}
+
+.text-brand {
+  color: $brand-color;
+}
+
+.text-brand-secondary {
+  color: $brand-color-secondary;
+}
+
+.bg-brand {
+  background-color: $brand-color;
+}
+.bg-brand-secondary {
+  background-color: $brand-color-secondary;
 }

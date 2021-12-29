@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Comment;
@@ -61,6 +62,17 @@ class DatabaseSeeder extends Seeder
         // Country::factory()->count(50)->create();
         // University::factory()->count(200)->create();
         // Course::factory()->count(500)->create();
+
+        Tag::factory()->count(25)->create();
+        $tags = Tag::get()->pluck('id');
+        foreach (Course::get() as $course) {
+            $random = $faker->numberBetween(1, 15);
+            $selected = array_unique($faker->randomElements($tags, $random));
+            sort($selected);
+            $course->tags()->sync($selected);
+            echo "\t- Attaching {$course->name} \n\r";
+        }
+
         Wishlist::factory()->count(1000)->create();
         Comment::factory()->count(1000)->create();
     }

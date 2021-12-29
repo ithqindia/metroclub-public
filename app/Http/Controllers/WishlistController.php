@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
-class WishlistApiController extends Controller
+class WishlistController extends Controller
 {
     public function index()
     {

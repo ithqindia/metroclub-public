@@ -63,7 +63,7 @@ export default new Vuex.Store({
     async fetchUniversities({ commit }) {
       try {
         Axios.get(
-          `/api/v1/universities/${this.state.country}/${this.state.levelOfStudy}/${this.state.courseTags}/all`
+          `/web/v1/universities/${this.state.country}/${this.state.levelOfStudy}/${this.state.courseTags}/all`
         ).then((res) => {
           commit("setUniversities", res.data);
         });
