@@ -1,59 +1,58 @@
 <template>
   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div style="border: 1px solid #c0c0c0; margin: 10px">
+    <div style="border: 1px solid #c0c0c0" class="m-3">
       <div class="overlay">
         <div
-          class="bgi-no-repeat bgi-position-center bgi-size-cover min-h-200px"
+          class="bgi-no-repeat bgi-position-center bgi-size-cover min-h-200px cursor-pointer"
           v-bind:style="{
             backgroundImage: 'url(' + university.logo + '?v=3)',
           }"
         ></div>
         <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-          <router-link tag="a" to="{ name: 'g-map' }" class="btn btn-primary"
+          <router-link
+            tag="a"
+            :to="{
+              name: 'university-details',
+              params: {
+                id: university.uuid,
+              },
+            }"
+            class="btn btn-primary"
             >More details</router-link
           >
         </div>
       </div>
 
-      <div class="content" style="padding: 10px">
-        <div
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            line-clamp: 1;
-            -webkit-box-orient: vertical;
-          "
-        >
-          <a
-            href="#"
+      <div class="p-3">
+        <div class="line-clamp line-clamp-single">
+          <router-link
+            :to="{
+              name: 'university-details',
+              params: {
+                id: university.uuid,
+              },
+            }"
             class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base"
           >
-            {{ university.name }}
-          </a>
+            {{ university.name }}</router-link
+          >
         </div>
-        <p
-          style="
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            line-clamp: 4;
-            -webkit-box-orient: vertical;
-          "
-        >
+        <p class="line-clamp line-clamp-four">
           {{ university.description }}
         </p>
-        <div
-          style="margin-top: 10px"
-          class="text-center d-flex justify-content-center"
-        >
+        <div class="text-center d-flex justify-content-center mt-3">
+          {{ university.wished }}
           <button
             class="btn btn-primary"
             v-on:click="addToWishList(university.uuid)"
           >
             <i class="bi bi-heart fs-3"></i> Shortlist
+          </button>
+          <button
+            class="btn btn-secondary"
+            v-on:click="removeFromWishList(university.uuid)"
+          >
+            <i class="bi bi-trash fs-3 text-white"></i> Remove
           </button>
         </div>
       </div>

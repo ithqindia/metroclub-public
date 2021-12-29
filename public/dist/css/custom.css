@@ -1588,3 +1588,27 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?38c4d2499557ae0379fd160e1
 .svg-icon svg [fill]:not(.permanent):not(g) {
   fill: #135b9e !important;
 }
+
+.line-clamp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.line-clamp-single {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+.line-clamp-four {
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.btn.btn-secondary {
+  background-color: #f05736;
+  color: white;
+}
+.btn.btn-secondary:hover:not(.btn-active) {
+  color: white;
+  background-color: #e23611 !important;
+}

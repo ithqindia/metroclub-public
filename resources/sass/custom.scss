@@ -43,3 +43,30 @@ $menu-item-color: #5e6278;
 .svg-icon svg [fill]:not(.permanent):not(g) {
   fill: $brand-color !important;
 }
+
+.line-clamp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  &-single {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+  &-four {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
+
+.btn.btn-secondary {
+  background-color: #f05736;
+  color: white;
+  &:hover {
+    &:not(.btn-active) {
+      color: white;
+      background-color: #e23611 !important;
+    }
+  }
+}

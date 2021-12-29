@@ -12,7 +12,8 @@
       </ul>
     </div> -->
     <router-link to="/">Search</router-link> |
-    <router-link to="/universities">Universities</router-link>
+    <router-link to="/universities">Universities</router-link> |
+    <router-link to="/university/details">University details</router-link>
     <router-view></router-view>
   </div>
 </template>
