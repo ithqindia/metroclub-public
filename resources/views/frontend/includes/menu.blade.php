@@ -63,15 +63,30 @@
 
                 </div>
             </div>
-            <div class="d-flex align-items-stretch flex-shrink-0">
-                <div class="menu-item me-lg-1">
-                    <a class="menu-link py-3 right-menu" href="/login"> <span class="menu-title">Login</span></a>
+            @if (Auth::user())
+                <div class="d-flex align-items-stretch flex-shrink-0">
+                    <div class="menu-item me-lg-1">
+                        <a class="menu-link py-3 right-menu" href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <span
+                                class="menu-title">Logout</span></a>
+                    </div>
                 </div>
-                <div class="menu-item me-lg-1">
-                    <a class="menu-link py-3 right-menu" href="/register"> <span
-                            class="menu-title">Register</span></a>
+            @else
+                <div class="d-flex align-items-stretch flex-shrink-0">
+                    <div class="menu-item me-lg-1">
+                        <a class="menu-link py-3 right-menu" href="/login"> <span
+                                class="menu-title">Login</span></a>
+                    </div>
+                    <div class="menu-item me-lg-1">
+                        <a class="menu-link py-3 right-menu" href="/register"> <span
+                                class="menu-title">Register</span></a>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </div>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
