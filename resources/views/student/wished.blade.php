@@ -6,11 +6,12 @@
 @section('pageTitle', 'Dashboard')
 @section('breadcrumbTitle', 'Dashboard')
 
+
 @section('main-content')
-    @include('student.dashboard')
+    @include('student.student-info-panel')
 
     <div class="card mb-a8 p-10">
-        <h1>Dashboard page</h1>
+        <h1>wished</h1>
     </div>
 @endsection
 
