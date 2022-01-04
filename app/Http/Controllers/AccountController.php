@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RefereeDetail;
+use App\Models\EmployeeDetail;
+use App\Models\EmployeeAddress;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-    public function index($url)
+    public function index($route)
     {
         $user = Auth::user();
-        switch ($url) {
+        switch ($route) {
             case 'dashboard':
                 $info = [1];
                 return view('student.dashboard', compact('info', 'user'));
@@ -23,8 +26,9 @@ class AccountController extends Controller
                 $info = [1];
                 return view('student.educational-information', compact('info', 'user'));
             case 'employment-information':
-                $info = [1];
-                return view('student.employment-information', compact('info', 'user'));
+                $referee_data = RefereeDetail::where('user_id', $user->id)->get()->first();
+                $employee_data = EmployeeDetail::where('user_id', $user->id)->get()->first();
+                return view('student.employment-information', compact('referee_data', 'employee_data','user'));
             case 'counselor-session':
                 $info = [1];
                 return view('student.counselor-session', compact('info', 'user'));

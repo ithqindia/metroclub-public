@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RefereeDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -8,6 +9,8 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\RefereeDataController;
+use App\Http\Controllers\EmployeeDataController;
 
 Auth::routes();
 
@@ -39,10 +42,19 @@ Route::get('/search', function () {
     return view('frontend.search');
 });
 
+
 Route::middleware(['auth:sanctum'])->group(function () {
     // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
     Route::resource('/web/v1/wishlist/university', WishlistController::class);
     Route::resource('/web/v1/comment', CommentController::class);
+    Route::get("/me/referee", [RefereeDataController::class, 'edit']);
+    Route::post("/me/referee", [RefereeDataController::class, 'store']);
+    Route::put("/me/referee", [RefereeDataController::class, 'update']);
+
+
+    Route::post("/me/employee", [EmployeeDataController::class, 'store']);
+    Route::get("/me/employee", [EmployeeDataController::class, 'edit']);
+    Route::put("/me/employee", [EmployeeDataController::class, 'update']);
     Route::get("/me/{route}", [AccountController::class, 'index']);
 });
 
