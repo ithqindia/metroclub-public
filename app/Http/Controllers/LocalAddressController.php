@@ -46,7 +46,7 @@ class LocalAddressController extends Controller
 
         if ($localAddress) {
             // If data is present then show data
-            return view('student.local-address', compact('user', 'localAddress'));
+            return view('student.employee-address-form', compact('user', 'localAddress'));
         } else {
             // If no data is present then show form
             //$actionUrl = "/students/$id/employee-address-form";

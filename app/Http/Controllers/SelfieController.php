@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Selfie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class SelfieController extends Controller
@@ -22,17 +23,18 @@ class SelfieController extends Controller
         Session::flash('message', 'Data inserted successfully !');
         return redirect('/students');
     }
-    public function show($id)
+    public function show()
     {
-        $selfieInformation = Selfie::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $selfieInformation = Selfie::where('user_id', $user->id)->get()->first();
+        //$user = User::find($id);
         if ($selfieInformation) {
             // If data is present then show data
-            return view('selfie', compact('user', 'selfieInformation'));
+            return view('student.selfie-form', compact('user', 'selfieInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/selfie-form";
-            return view('selfie-form', compact('user', 'actionUrl'));
+            //$actionUrl = "/students/$id/selfie-form";
+            return view('student.selfie-form', compact('user'));
         }
     }
 
