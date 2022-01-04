@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tag extends Model
 {
     use HasFactory;
-    // use Concerns\UsesUuid;
 
     protected $guarded = [];
 
