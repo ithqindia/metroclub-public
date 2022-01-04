@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\EmployeeDetail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EmployeeDataController extends Controller
@@ -47,12 +48,11 @@ class EmployeeDataController extends Controller
             return view('employee-form', compact('user', 'actionUrl'));
         }
     }
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/employee-form/";
-        $employee =  EmployeeDetail::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('employee-form', compact('user', 'employee', 'actionUrl'));
+        $user =Auth::user();
+        $employee =  EmployeeDetail::where('user_id', $user->id)->get()->first();
+        return view('student.employee-form', compact('user', 'employee'));
     }
 
     public function update(Request $request, $id)

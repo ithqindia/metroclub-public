@@ -100,7 +100,7 @@
             <h1>No information available</h1>
         @endif
         <div>
-            <a href="/me/referee" class="btn btn-info  btn-sm mx-3">Update</a>
+            <a href="/me/employee" class="btn btn-info  btn-sm mx-3">Update</a>
         </div>
     </div>
     {{-- referee details --}}
@@ -181,7 +181,7 @@
             <h1>No information available</h1>
         @endif
         <div>
-            <a href="#" class="btn btn-info  btn-sm mx-3">Update</a>
+            <a href="/me/referee" class="btn btn-info  btn-sm mx-3">Update</a>
         </div>
     </div>
 @endsection
