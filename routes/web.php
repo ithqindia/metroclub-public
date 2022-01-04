@@ -6,8 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RefereeDataController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UniversityController;
+use App\Models\RefereeDetail;
 
 Auth::routes();
 
@@ -39,10 +41,12 @@ Route::get('/search', function () {
     return view('frontend.search');
 });
 
+
 Route::middleware(['auth:sanctum'])->group(function () {
     // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
     Route::resource('/web/v1/wishlist/university', WishlistController::class);
     Route::resource('/web/v1/comment', CommentController::class);
+    Route::get("/me/referee",[RefereeDataController::class,'index']);
     Route::get("/me/{route}", [AccountController::class, 'index']);
 });
 
