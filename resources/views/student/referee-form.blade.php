@@ -1,4 +1,3 @@
-
 j2
 
 @extends('student.layout.app')
@@ -6,11 +5,8 @@ j2
 @section('main-content')
     {{-- referee information start --}}
     <section>
-        <div class="col-12 mt-5 mb-5 text-center">
-            <h2>Referee Information for {{ $user->name }}</h2>
-        </div>
         <div class="container">
-            <form class="row g-3 needs-validation" method="post" action="{{ $actionUrl }}">
+            <form class="row g-3 needs-validation" method="post" action="/me/refree">
                 @csrf
                 {{-- update code --}}
                 @isset($referee)

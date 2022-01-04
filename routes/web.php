@@ -46,7 +46,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
     Route::resource('/web/v1/wishlist/university', WishlistController::class);
     Route::resource('/web/v1/comment', CommentController::class);
-    Route::get("/me/referee",[RefereeDataController::class,'index']);
+    Route::get("/me/referee", [RefereeDataController::class, 'edit']);
+    Route::post("/me/referee", [RefereeDataController::class, 'store']);
+    Route::put("/me/referee", [RefereeDataController::class, 'update']);
     Route::get("/me/{route}", [AccountController::class, 'index']);
 });
 

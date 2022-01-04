@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class RefereeDataController extends Controller
 {
-    public function index(){
-        $user = Auth::user();
-        $referee =   RefereeDetail::where('user_id', $user->id)->get()->first();
-
-            $actionUrl = "/me/referee-form";
-            return view('student.referee-form', compact('user', 'actionUrl'));
-    }
     public function store(Request $request, $id)
     {
         $request->validate([
@@ -52,12 +45,12 @@ class RefereeDataController extends Controller
             return view('referee-form', compact('user', 'actionUrl'));
         }
     }
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/referee-form";
-        $referee =  RefereeDetail::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('referee-form', compact('user', 'referee', 'actionUrl'));
+        $user =
+            Auth::user();
+        $referee =  RefereeDetail::where('user_id', $user->id)->get()->first();
+        return view('student.referee-form', compact('user', 'referee'));
     }
 
     public function update(Request $request, $id)
