@@ -51,3 +51,7 @@ Route::resource(
     UniversityController::class,
     ['only' => ['index', 'show']]
 );
+
+Route::get('/login-route', function () {
+    return view('single.login');
+});
