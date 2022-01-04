@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class University extends Model
 {
     use HasFactory;
-    use Concerns\UsesUuid;
 
     protected $guarded = [];
+
+    public static $imageFolder = 'universities';
 
     public function country()
     {

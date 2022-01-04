@@ -1,15 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Models\Selfie;
+use App\Models\LocalAddressData;
+use App\Models\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-    public function index($url)
+    public function index($route)
     {
         $user = Auth::user();
-        switch ($url) {
+        switch ($route) {
             case 'dashboard':
                 $info = [1];
                 return view('student.dashboard', compact('info', 'user'));
@@ -17,8 +18,10 @@ class AccountController extends Controller
                 $info = [1];
                 return view('student.wished', compact('info', 'user'));
             case 'personal-information':
-                $info = [1];
-                return view('student.personal-information', compact('info', 'user'));
+                $basic_information = PersonalInformation::where('user_id', $user->id)->get()->first();
+                $local_address_data = LocalAddressData::where('user_id', $user->id)->get()->first();
+                $selfie_information = Selfie::where('user_id', $user->id)->get()->first();
+                return view('student.personal-details', compact('basic_information','local_address_data','selfie_information','user'));
             case 'educational-information':
                 $info = [1];
                 return view('student.educational-information', compact('info', 'user'));
