@@ -47,10 +47,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
     Route::resource('/web/v1/wishlist/university', WishlistController::class);
     Route::resource('/web/v1/comment', CommentController::class);
-    Route::get('/me/personal-information', [PersonalInformationController::class, 'show']);
-    Route::post('/me/personal-information', [PersonalInformationController::class, 'store']);
-    Route::get('/me/personal-information/edit', [PersonalInformationController::class, 'edit']);
-    Route::put('/me/personal-information', [PersonalInformationController::class, 'update']);
+    Route::get('/me/personal-info', [PersonalInformationController::class, 'show']);
+    Route::post('/me/personal-info', [PersonalInformationController::class, 'store']);
+    Route::get('/me/personal-info/edit', [PersonalInformationController::class, 'edit']);
+    Route::put('/me/personal-info', [PersonalInformationController::class, 'update']);
 
     //local
     Route::post('/me/employee-address', [LocalAddressController::class, 'store']);

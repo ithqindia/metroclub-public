@@ -59,11 +59,11 @@ class PersonalInformationController extends Controller
         //$user = User::find($id);
         if ($personalInformation) {
             // If data is present then show data
-            return view('student.personal-information', compact('user', 'personalInformation'));
+            return view('student.personal-information-form', compact('user', 'personalInformation'));
         } else {
             // If no data is present then show form
             //$actionUrl = "/students/$id/personal-information";
-            return view('student.personal-information', compact('user'));
+            return view('student.personal-information-form', compact('user'));
         }
     }
 

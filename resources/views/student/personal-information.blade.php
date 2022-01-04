@@ -121,7 +121,7 @@
             <h1>No information available</h1>
         @endif
         <div>
-            <a href="/me/personal-information" class="btn btn-info  btn-sm mx-3">Update</a>
+            <a href="/me/personal-info" class="btn btn-info  btn-sm mx-3">Update</a>
         </div>
     </div>
 
@@ -139,13 +139,15 @@
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Address</label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_address }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_address }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Apartment, Suite, etc</label>
                         <div class="col-lg-8 fv-row">
-                            <span class="fw-bold text-gray-800 fs-6">{{ $user->local_address_data->local_apartment }}</span>
+                            <span
+                                class="fw-bold text-gray-800 fs-6">{{ $user->local_address_data->local_apartment }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
@@ -158,37 +160,43 @@
                         <label class="col-lg-4 fw-bold text-muted">Pincode
                         </label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_pincode }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_pincode }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">State</label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_state }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_state }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Country</label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_country }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_country }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Emergency contact name</label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_emergency_contact_name }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_emergency_contact_name }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Emergency contact number</label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_emergency_contact_number }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_emergency_contact_number }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Relationship to emergency contact</label>
                         <div class="col-lg-8">
-                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_emergency_relationship }}</span>
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->local_address_data->local_emergency_relationship }}</span>
                         </div>
                     </div>
                 </div>

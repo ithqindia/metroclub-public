@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Selfie;
 use App\Models\LocalAddressData;
 use App\Models\PersonalInformation;
@@ -21,7 +23,7 @@ class AccountController extends Controller
                 $basic_information = PersonalInformation::where('user_id', $user->id)->get()->first();
                 $local_address_data = LocalAddressData::where('user_id', $user->id)->get()->first();
                 $selfie_information = Selfie::where('user_id', $user->id)->get()->first();
-                return view('student.personal-details', compact('basic_information','local_address_data','selfie_information','user'));
+                return view('student.personal-information', compact('basic_information', 'local_address_data', 'selfie_information', 'user'));
             case 'educational-information':
                 $info = [1];
                 return view('student.educational-information', compact('info', 'user'));
