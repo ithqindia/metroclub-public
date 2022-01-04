@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Diploma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EducationalInformationDiplomaController extends Controller
@@ -35,26 +36,24 @@ class EducationalInformationDiplomaController extends Controller
         return redirect('/students');
     }
 
-    public function show($id)
+    public function show()
     {
-        $diplomaInformation = Diploma::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $diplomaInformation = Diploma::where('user_id', $user->id)->get()->first();
         if ($diplomaInformation) {
             // If data is present then show data
-            return view('diploma', compact('user', 'diplomaInformation'));
+            return view('student.diploma-form', compact('user', 'diplomaInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/diploma-form";
-            return view('diploma-form', compact('user', 'actionUrl'));
+            return view('student.diploma-form', compact('user', 'actionUrl'));
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/diploma-form";
-        $diplomaInformation = Diploma::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('diploma-form', compact('user', 'diplomaInformation', 'actionUrl'));
+        $user = Auth::user();
+        $diplomaInformation =  Diploma::where('user_id', $user->id)->get()->first();
+        return view('student.diploma-form', compact('user', 'diplomaInformation'));
     }
 
     public function update(Request $request, $id)

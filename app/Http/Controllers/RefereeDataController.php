@@ -45,9 +45,10 @@ class RefereeDataController extends Controller
             return view('referee-form', compact('user', 'actionUrl'));
         }
     }
+
     public function edit()
     {
-        $user =Auth::user();
+        $user = Auth::user();
         $referee =  RefereeDetail::where('user_id', $user->id)->get()->first();
         return view('student.referee-form', compact('user', 'referee'));
     }

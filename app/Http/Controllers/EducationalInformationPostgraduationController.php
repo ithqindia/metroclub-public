@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Diploma;
 use Illuminate\Http\Request;
 use App\Models\PostGraduation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EducationalInformationPostgraduationController extends Controller
@@ -35,26 +37,32 @@ class EducationalInformationPostgraduationController extends Controller
         return redirect('/students');
     }
 
-    public function show($id)
+    public function show()
     {
-        $postGraduationInformation = PostGraduation::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $postGraduationInformation = PostGraduation::where('user_id', $user->id)->get()->first();
         if ($postGraduationInformation) {
             // If data is present then show data
-            return view('postgraduation', compact('user', 'postGraduationInformation'));
+            return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/post-graduation-form";
-            return view('post-graduation-form', compact('user', 'actionUrl'));
+            return view('student.post-graduation-form', compact('user', 'actionUrl'));
         }
     }
 
-    public function edit($id)
+    // public function edit($id)
+    // {
+    //     $actionUrl = "/students/$id/post-graduation-form";
+    //     $postGraduationInformation = PostGraduation::where('user_id', $id)->get()->first();
+    //     $user = User::find($id);
+    //     return view('post-graduation-form', compact('user', 'postGraduationInformation', 'actionUrl'));
+    // }
+
+    public function edit()
     {
-        $actionUrl = "/students/$id/post-graduation-form";
-        $postGraduationInformation = PostGraduation::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('post-graduation-form', compact('user', 'postGraduationInformation', 'actionUrl'));
+        $user = Auth::user();
+        $postGraduationInformation =  PostGraduation::where('user_id', $user->id)->get()->first();
+        return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
     }
 
     public function update(Request $request, $id)

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Diploma;
 use App\Models\Graduation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EducationalInformationGraduationController extends Controller
@@ -35,26 +37,24 @@ class EducationalInformationGraduationController extends Controller
         return redirect('/students');
     }
 
-    public function show($id)
+    public function show()
     {
-        $graduationInformation = Graduation::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $graduationInformation = Graduation::where('user_id', $user->id)->get()->first();
         if ($graduationInformation) {
             // If data is present then show data
-            return view('graduation', compact('user', 'graduationInformation'));
+            return view('student.graduation-form', compact('user', 'graduationInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/graduation-form";
-            return view('graduation-form', compact('user', 'actionUrl'));
+            return view('student.graduation-form', compact('user', 'actionUrl'));
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/graduation-form";
-        $graduationInformation = Graduation::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('graduation-form', compact('user', 'graduationInformation', 'actionUrl'));
+        $user = Auth::user();
+        $graduationInformation =  Diploma::where('user_id', $user->id)->get()->first();
+        return view('student.graduation-form', compact('user', 'graduationInformation'));
     }
 
     public function update(Request $request, $id)

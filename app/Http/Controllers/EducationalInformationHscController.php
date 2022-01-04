@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hsc;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EducationalInformationHscController extends Controller
@@ -35,26 +36,24 @@ class EducationalInformationHscController extends Controller
         return redirect('/students');
     }
 
-    public function show($id)
+    public function show()
     {
-        $hscInformation = Hsc::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $hscInformation = Hsc::where('user_id', $user->id)->get()->first();
         if ($hscInformation) {
             // If data is present then show data
-            return view('hsc', compact('user', 'hscInformation'));
+            return view('student.hsc-form', compact('user', 'hscInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/hsc-form";
-            return view('hsc-form', compact('user', 'actionUrl'));
+            return view('student.hsc-form', compact('user', 'actionUrl'));
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/hsc-form";
-        $hscInformation = Hsc::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('hsc-form', compact('user', 'hscInformation', 'actionUrl'));
+        $user = Auth::user();
+        $hscInformation =  Hsc::where('user_id', $user->id)->get()->first();
+        return view('student.hsc-form', compact('user', 'hscInformation'));
     }
 
     public function update(Request $request, $id)

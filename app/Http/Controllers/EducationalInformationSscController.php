@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ssc;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EducationalInformationSscController extends Controller
@@ -35,27 +36,26 @@ class EducationalInformationSscController extends Controller
         return redirect('/students');
     }
 
-    public function show($id)
+    public function show()
     {
-        $sscInformation = Ssc::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $sscInformation = Ssc::where('user_id', $user->id)->get()->first();
         if ($sscInformation) {
             // If data is present then show data
-            return view('ssc', compact('user', 'sscInformation'));
+            return view('student.education-form', compact('user', 'sscInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/education-form";
-            return view('education-form', compact('user', 'actionUrl'));
+            return view('student.education-form', compact('user', 'actionUrl'));
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/education-form";
-        $sscInformation = Ssc::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('education-form', compact('user', 'sscInformation', 'actionUrl'));
+        $user = Auth::user();
+        $sscInformation =  Ssc::where('user_id', $user->id)->get()->first();
+        return view('student.education-form', compact('user', 'sscInformation'));
     }
+
     public function update(Request $request, $id)
     {
 
