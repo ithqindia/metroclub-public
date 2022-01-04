@@ -3,6 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SelfieController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\RefereeDataController;
+use App\Http\Controllers\EmployeeDataController;
+use App\Http\Controllers\LocalAddressController;
+use App\Http\Controllers\PersonalInformationController;
+use App\Http\Controllers\EducationalInformationHscController;
+use App\Http\Controllers\EducationalInformationSscController;
+use App\Http\Controllers\EducationalInformationDiplomaController;
+use App\Http\Controllers\EducationalInformationGraduationController;
+use App\Http\Controllers\EducationalInformationPostgraduationController;
 
 Auth::routes();
 
@@ -69,10 +80,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get("/me/diploma/edit", [EducationalInformationDiplomaController::class, 'edit']);
     Route::put("/me/diploma", [EducationalInformationDiplomaController::class, 'update']);
     // post graduation
-    Route::get("/me/ssc", [EducationalInformationPostgraduationController::class, 'show']);
-    Route::post("/me/ssc", [EducationalInformationPostgraduationController::class, 'store']);
-    Route::get("/me/ssc/edit", [EducationalInformationPostgraduationController::class, 'edit']);
-    Route::put("/me/ssc", [EducationalInformationPostgraduationController::class, 'update']);
+    Route::get("/me/post-graduation", [EducationalInformationPostgraduationController::class, 'show']);
+    Route::post("/me/post-graduation", [EducationalInformationPostgraduationController::class, 'store']);
+    Route::get("/me/post-graduation/edit", [EducationalInformationPostgraduationController::class, 'edit']);
+    Route::put("/me/post-graduation", [EducationalInformationPostgraduationController::class, 'update']);
+
     Route::get('/me/personal-info', [PersonalInformationController::class, 'show']);
     Route::post('/me/personal-info', [PersonalInformationController::class, 'store']);
     Route::get('/me/personal-info/edit', [PersonalInformationController::class, 'edit']);

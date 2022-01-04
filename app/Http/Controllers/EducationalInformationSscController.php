@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ssc;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class EducationalInformationSscController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'ssc_school' => 'required|min:5|max:20',
@@ -23,7 +22,7 @@ class EducationalInformationSscController extends Controller
         ]);
 
         Ssc::create([
-            'user_id' => $id,
+            'user_id' => Auth::user()->id,
             'ssc_school' => $request->get('ssc_school'),
             'ssc_board' => $request->get('ssc_board'),
             'ssc_percentage' => $request->get('ssc_percentage'),
@@ -33,7 +32,7 @@ class EducationalInformationSscController extends Controller
             'school_year_to' => $request->get('school_year_to'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/students');
+        return redirect('/me/educational-information');
     }
 
     public function show()
@@ -41,25 +40,18 @@ class EducationalInformationSscController extends Controller
         $user = Auth::user();
         $sscInformation = Ssc::where('user_id', $user->id)->get()->first();
         if ($sscInformation) {
-            // If data is present then show data
-            return view('student.education-form', compact('user', 'sscInformation'));
+            // If data is present then show form with data
+            return view('student.education-form-ssc', compact('user', 'sscInformation'));
         } else {
-            // If no data is present then show form
-            return view('student.education-form', compact('user', 'actionUrl'));
+            // If no data is present then show empty form
+            return view('student.education-form-ssc', compact('user'));
         }
     }
 
-    public function edit()
+    public function update(Request $request)
     {
         $user = Auth::user();
-        $sscInformation =  Ssc::where('user_id', $user->id)->get()->first();
-        return view('student.education-form', compact('user', 'sscInformation'));
-    }
-
-    public function update(Request $request, $id)
-    {
-
-        $sscInformation = Ssc::where('user_id', $id)->get()->first();
+        $sscInformation = Ssc::where('user_id', $user->id)->get()->first();
 
         $request->validate([
             'ssc_school' => 'required|min:5|max:20',
@@ -71,7 +63,7 @@ class EducationalInformationSscController extends Controller
             'school_year_to' => 'required|size:4|digits:4',
         ]);
 
-        $sscInformation->user_id = $id;
+        $sscInformation->user_id = $user->id;
         $sscInformation->ssc_school = $request->get('ssc_school');
         $sscInformation->ssc_board = $request->get('ssc_board');
         $sscInformation->ssc_percentage = $request->get('ssc_percentage');
@@ -81,6 +73,6 @@ class EducationalInformationSscController extends Controller
         $sscInformation->school_year_to = $request->get('school_year_to');
         $sscInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/educational-information');
     }
 }

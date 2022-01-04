@@ -9,6 +9,15 @@
 @section('main-content')
     @include('student.student-info-panel')
     <div class="card mb-a8 p-10 my-5">
+        @if (Session::has('message'))
+            <div class="alert alert-primary">
+                <div class="d-flex flex-column">
+                    <h4 class="mb-1 text-dark">Information!</h4>
+                    {{ Session::get('message') }}
+                </div>
+            </div>
+        @endif
+
         @if (isset($user->employee_data))
             <div class=" card mb-5 mb-xl-10" id="kt_profile_details_view">
                 <div class="card-header cursor-pointer">
