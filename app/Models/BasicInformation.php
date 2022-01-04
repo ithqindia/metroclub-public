@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class BasicInformation extends Model
 {
     use HasFactory;
-
+    protected $table = "basic_informations";
     protected $guarded = [];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

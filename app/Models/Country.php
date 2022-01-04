@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Course;
 use App\Models\University;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Country extends Model
 {
     use HasFactory;
-    use Concerns\UsesUuid;
 
     protected $guarded = [];
 
@@ -19,8 +17,8 @@ class Country extends Model
         return $this->hasMany(University::class);
     }
 
-    // public function courses()
-    // {
-    //     return $this->hasManyThrough(University::class, Course::class);
-    // }
+    //      public function courses()
+    //      {
+    //          return $this->hasManyThrough(University::class, Course::class);
+    //      }
 }
