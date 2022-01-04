@@ -12,6 +12,8 @@ class University extends Model
 
     protected $guarded = [];
 
+    public static $imageFolder = 'universities';
+
     public function country()
     {
         return $this->belongsTo(Country::class);

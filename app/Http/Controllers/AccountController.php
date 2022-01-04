@@ -9,6 +9,9 @@ use App\Models\Ssc;
 use App\Models\Diploma;
 use App\Models\Graduation;
 use App\Models\PostGraduation;
+use App\Models\Selfie;
+use App\Models\LocalAddressData;
+use App\Models\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -24,8 +27,10 @@ class AccountController extends Controller
                 $info = [1];
                 return view('student.wished', compact('info', 'user'));
             case 'personal-information':
-                $info = [1];
-                return view('student.personal-information', compact('info', 'user'));
+                $basic_information = PersonalInformation::where('user_id', $user->id)->get()->first();
+                $local_address_data = LocalAddressData::where('user_id', $user->id)->get()->first();
+                $selfie_information = Selfie::where('user_id', $user->id)->get()->first();
+                return view('student.personal-information', compact('basic_information', 'local_address_data', 'selfie_information', 'user'));
             case 'educational-information':
                 $info = [1];
                 $ssc_information = Ssc::where('user_id', $user->id)->get()->first();

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\LocalAddressData;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class LocalAddressController extends Controller
 {
@@ -37,27 +38,30 @@ class LocalAddressController extends Controller
         Session::flash('message', 'Data inserted successfully !');
         return redirect('/students');
     }
-    public function show($id)
+
+    public function show()
     {
-        $localAddress =  LocalAddressData::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $localAddress =  LocalAddressData::where('user_id', $user->id)->get()->first();
+        //$user = User::find($id);
 
         if ($localAddress) {
             // If data is present then show data
-            return view('local-address', compact('user', 'localAddress'));
+            return view('student.employee-address-form', compact('user', 'localAddress'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/employee-address-form";
-            return view('employee-address-form', compact('user', 'actionUrl'));
+            //$actionUrl = "/students/$id/employee-address-form";
+            return view('student.employee-address-form', compact('user'));
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/employee-address-form";
-        $localAddress = LocalAddressData::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('employee-address-form', compact('user', 'localAddress', 'actionUrl'));
+        //$actionUrl = "/students/$id/employee-address-form";
+        $localAddress = LocalAddressData::where('user_id', $user->id)->get()->first();
+        //$user = User::find($id);
+        $user = Auth::user();
+        return view('student.employee-address-form', compact('user', 'localAddress'));
     }
 
     public function update(Request $request, $id)

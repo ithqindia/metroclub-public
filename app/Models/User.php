@@ -13,7 +13,7 @@ use App\Models\EmployeeDetail;
 use App\Models\PostGraduation;
 use App\Models\EmployeeAddress;
 use App\Models\UserInformation;
-use App\Models\BasicInformation;
+use App\Models\PersonalInformation;
 use App\Models\CounselorSession;
 use App\Models\LocalAddressData;
 use Laravel\Sanctum\HasApiTokens;
@@ -83,7 +83,7 @@ class User extends Authenticatable
 
     public function basic_information()
     {
-        return $this->hasOne(BasicInformation::class);
+        return $this->hasOne(PersonalInformation::class);
     }
 
     public function ssc_information()
@@ -125,5 +125,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Selfie::class);
     }
-
 }

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\BasicInformation;
+use App\Models\PersonalInformation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PersonalInformationController extends Controller
@@ -19,9 +20,9 @@ class PersonalInformationController extends Controller
             'mobile' => 'required|digits:10',
             'phone' => 'required|size:10|digits:10',
             'whatsapp_number' => 'required|size:10|digits:10',
-            'skype_id' => 'required',
-            'zoom_id' => 'required',
-            'other_id' => 'required',
+            'skype' => 'required',
+            'zoom' => 'required',
+            'other' => 'required',
             'birth_date' => 'required',
             'passport_number' => 'required',
             'nationality' => 'required',
@@ -29,7 +30,7 @@ class PersonalInformationController extends Controller
             'relationship_status' => 'required',
         ]);
 
-        BasicInformation::create([
+        PersonalInformation::create([
             'user_id' => $id,
             'salutation' => $request->get('salutation'),
             'first_name' => $request->get('first_name'),
@@ -38,9 +39,9 @@ class PersonalInformationController extends Controller
             'mobile' => $request->get('mobile'),
             'phone' => $request->get('phone'),
             'whatsapp_number' => $request->get('whatsapp_number'),
-            'skype_id' => $request->get('skype_id'),
-            'zoom_id' => $request->get('zoom_id'),
-            'other_id' => $request->get('other_id'),
+            'skype' => $request->get('skype'),
+            'zoom' => $request->get('zoom'),
+            'other' => $request->get('other'),
             'birth_date' => $request->get('birth_date'),
             'passport_number' => $request->get('passport_number'),
             'nationality' => $request->get('nationality'),
@@ -51,31 +52,33 @@ class PersonalInformationController extends Controller
         return redirect('/students');
     }
 
-    public function show($id)
+    public function show()
     {
-        $personalInformation = BasicInformation::where('user_id', $id)->get()->first();
-        $user = User::find($id);
+        $user = Auth::user();
+        $personalInformation = PersonalInformation::where('user_id', $user->id)->get()->first();
+        //$user = User::find($id);
         if ($personalInformation) {
             // If data is present then show data
-            return view('personal', compact('user', 'personalInformation'));
+            return view('student.personal-information-form', compact('user', 'personalInformation'));
         } else {
             // If no data is present then show form
-            $actionUrl = "/students/$id/personal-information";
-            return view('personal-information-form', compact('user', 'actionUrl'));
+            //$actionUrl = "/students/$id/personal-information";
+            return view('student.personal-information-form', compact('user'));
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $actionUrl = "/students/$id/personal-information";
-        $personalInformation = BasicInformation::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-        return view('personal-information-form', compact('user', 'personalInformation', 'actionUrl'));
+        $user = Auth::user();
+        //$actionUrl = "/students/$id/personal-information";
+        $personalInformation = PersonalInformation::where('user_id', $user->id)->get()->first();
+        //$user = User::find($id);
+        return view('student.personal-information-form', compact('user', 'personalInformation'));
     }
 
     public function update(Request $request, $id)
     {
-        $personalInformation = BasicInformation::where('user_id', $id)->get()->first();
+        $personalInformation = PersonalInformation::where('user_id', $id)->get()->first();
         $request->validate([
             'salutation' => 'required',
             'first_name' => 'required',
@@ -84,9 +87,9 @@ class PersonalInformationController extends Controller
             'mobile' => 'required|digits:10',
             'phone' => 'required|size:10|digits:10',
             'whatsapp_number' => 'required|size:10|digits:10',
-            'skype_id' => 'required',
-            'zoom_id' => 'required',
-            'other_id' => 'required',
+            'skype' => 'required',
+            'zoom' => 'required',
+            'other' => 'required',
             'birth_date' => 'required',
             'passport_number' => 'required',
             'nationality' => 'required',
@@ -102,9 +105,9 @@ class PersonalInformationController extends Controller
         $personalInformation->mobile = $request->get('mobile');
         $personalInformation->phone = $request->get('phone');
         $personalInformation->whatsapp_number = $request->get('whatsapp_number');
-        $personalInformation->skype_id = $request->get('skype_id');
-        $personalInformation->zoom_id = $request->get('zoom_id');
-        $personalInformation->other_id = $request->get('other_id');
+        $personalInformation->skype = $request->get('skype');
+        $personalInformation->zoom = $request->get('zoom');
+        $personalInformation->other = $request->get('other');
         $personalInformation->birth_date = $request->get('birth_date');
         $personalInformation->passport_number = $request->get('passport_number');
         $personalInformation->nationality = $request->get('nationality');

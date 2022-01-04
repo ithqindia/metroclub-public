@@ -13,7 +13,7 @@ class UniversityController extends Controller
 {
     public function index()
     {
-        $universities = University::get();
+        $universities = University::paginate(20);
         return view('universities', compact('universities'));
     }
 
@@ -35,7 +35,8 @@ class UniversityController extends Controller
         $path = '';
         // Validate if file is uploaded
         if ($request->file('logo')->isValid()) {
-            $path = Storage::putFile('folderName_change_as_required', $request->file('logo'));
+            //$path = Storage::putFile('folderName_change_as_required', $request->file('logo'));
+            $path = $request->file('logo')->store(University::$imageFolder);
         } else {
             // TODO later
         }
@@ -44,8 +45,8 @@ class UniversityController extends Controller
             'name' => $request->get('name'),
             'city' => $request->get('city'),
             'details' => $request->get('details'),
-            // 'logo' => $request->get('logo'),
-            'logo' => $path,
+            //'logo' => $path,
+            'logo' =>  '/storage/' . $path,
             'country_id' => $request->get('country_id'),
             'is_enabled' => (bool)$request->get('is_enabled'),
         ]);
