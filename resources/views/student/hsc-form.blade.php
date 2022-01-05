@@ -7,6 +7,8 @@
                 {{ method_field('PUT') }}
                 <input type='hidden' name='hsc_information_id' value='{{ $hscInformation->id }}'>
             @endisset
+            <div class="card mb-a8 p-10">
+                <h1>Hsc form</h1>
             <div class="row my-5">
                 <div class="col-md-6">
                     <label for="inputCollege" class="form-label">College<span

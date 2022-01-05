@@ -6,6 +6,8 @@
             @isset($graduationInformation)
                 {{ method_field('PUT') }}
             @endisset
+            <div class="card mb-a8 p-10">
+                <h1>Graduation form</h1>
             <div class="row my-5">
                 <div class="col-md-6">
                     <label for="inputCollege" class="form-label">College<span

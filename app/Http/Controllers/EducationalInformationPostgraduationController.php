@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationPostgraduationController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'post_graduation_college' => 'required|min:5|max:20',
@@ -24,7 +24,7 @@ class EducationalInformationPostgraduationController extends Controller
         ]);
 
         PostGraduation::create([
-            'user_id' => $id,
+            'user_id' => Auth::user()->id,
             'post_graduation_college' => $request->get('post_graduation_college'),
             'post_graduation_university' => $request->get('post_graduation_university'),
             'post_graduation_aggregates' => $request->get('post_graduation_aggregates'),
@@ -34,7 +34,7 @@ class EducationalInformationPostgraduationController extends Controller
             'post_graduation_year_to' => $request->get('post_graduation_year_to'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/students');
+        return redirect('/me/educational-information');
     }
 
     public function show()
@@ -46,7 +46,7 @@ class EducationalInformationPostgraduationController extends Controller
             return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
         } else {
             // If no data is present then show form
-            return view('student.post-graduation-form', compact('user', 'actionUrl'));
+            return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
         }
     }
 
@@ -58,16 +58,17 @@ class EducationalInformationPostgraduationController extends Controller
     //     return view('post-graduation-form', compact('user', 'postGraduationInformation', 'actionUrl'));
     // }
 
-    public function edit()
+    // public function edit()
+    // {
+    //     $user = Auth::user();
+    //     $postGraduationInformation =  PostGraduation::where('user_id', $user->id)->get()->first();
+    //     return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
+    // }
+
+    public function update(Request $request)
     {
         $user = Auth::user();
-        $postGraduationInformation =  PostGraduation::where('user_id', $user->id)->get()->first();
-        return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $postGraduationInformation = PostGraduation::where('user_id', $id)->get()->first();
+        $postGraduationInformation = PostGraduation::where('user_id', $user->id)->get()->first();
         $request->validate([
             'post_graduation_college' => 'required|min:5|max:20',
             'post_graduation_university' => 'required|min:5|max:20',
@@ -78,7 +79,7 @@ class EducationalInformationPostgraduationController extends Controller
             'post_graduation_year_to' => 'required|size:4|digits:4',
         ]);
 
-        $postGraduationInformation->user_id = $id;
+        $postGraduationInformation->user_id = $user->id;
         $postGraduationInformation->post_graduation_college = $request->get('post_graduation_college');
         $postGraduationInformation->post_graduation_university = $request->get('post_graduation_university');
         $postGraduationInformation->post_graduation_aggregates = $request->get('post_graduation_aggregates');
@@ -88,6 +89,6 @@ class EducationalInformationPostgraduationController extends Controller
         $postGraduationInformation->post_graduation_year_to = $request->get('post_graduation_year_to');
         $postGraduationInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/educational-information');
     }
 }

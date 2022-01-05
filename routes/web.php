@@ -80,10 +80,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get("/me/diploma/edit", [EducationalInformationDiplomaController::class, 'edit']);
     Route::put("/me/diploma", [EducationalInformationDiplomaController::class, 'update']);
     // post graduation
-    Route::get("/me/post-graduation", [EducationalInformationPostgraduationController::class, 'show']);
-    Route::post("/me/post-graduation", [EducationalInformationPostgraduationController::class, 'store']);
-    Route::get("/me/post-graduation/edit", [EducationalInformationPostgraduationController::class, 'edit']);
-    Route::put("/me/post-graduation", [EducationalInformationPostgraduationController::class, 'update']);
+    Route::get("/me/postGraduation", [EducationalInformationPostgraduationController::class, 'show']);
+    Route::post("/me/postGraduation", [EducationalInformationPostgraduationController::class, 'store']);
+    Route::get("/me/postGraduation/edit", [EducationalInformationPostgraduationController::class, 'edit']);
+    Route::put("/me/postGraduation", [EducationalInformationPostgraduationController::class, 'update']);
 
     Route::get('/me/personal-info', [PersonalInformationController::class, 'show']);
     Route::post('/me/personal-info', [PersonalInformationController::class, 'store']);

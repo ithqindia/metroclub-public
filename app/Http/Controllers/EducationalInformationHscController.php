@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationHscController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'hsc_college' => 'required|min:5|max:20',
@@ -23,7 +23,7 @@ class EducationalInformationHscController extends Controller
         ]);
 
         Hsc::create([
-            'user_id' => $id,
+            'user_id' => Auth::user()->id,
             'hsc_college' => $request->get('hsc_college'),
             'hsc_board' => $request->get('hsc_board'),
             'hsc_percentage' => $request->get('hsc_percentage'),
@@ -33,7 +33,7 @@ class EducationalInformationHscController extends Controller
             'hsc_year_to' => $request->get('hsc_year_to'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/students');
+        return redirect('/me/educational-information');
     }
 
     public function show()
@@ -45,20 +45,21 @@ class EducationalInformationHscController extends Controller
             return view('student.hsc-form', compact('user', 'hscInformation'));
         } else {
             // If no data is present then show form
-            return view('student.hsc-form', compact('user', 'actionUrl'));
+            return view('student.hsc-form', compact('user', 'hscInformation'));
         }
     }
 
-    public function edit()
+    // public function edit()
+    // {
+    //     $user = Auth::user();
+    //     $hscInformation =  Hsc::where('user_id', $user->id)->get()->first();
+    //     return view('student.hsc-form', compact('user', 'hscInformation'));
+    // }
+
+    public function update(Request $request)
     {
         $user = Auth::user();
-        $hscInformation =  Hsc::where('user_id', $user->id)->get()->first();
-        return view('student.hsc-form', compact('user', 'hscInformation'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $hscInformation = Hsc::where('user_id', $id)->get()->first();
+        $hscInformation = Hsc::where('user_id', $user->id)->get()->first();
         $request->validate([
             'hsc_college' => 'required|min:5|max:20',
             'hsc_board' => 'required|min:5|max:20',
@@ -69,7 +70,7 @@ class EducationalInformationHscController extends Controller
             'hsc_year_to' => 'required|size:4|digits:4',
         ]);
 
-        $hscInformation->user_id = $id;
+        $hscInformation->user_id = $user->id;
         $hscInformation->hsc_college = $request->get('hsc_college');
         $hscInformation->hsc_board = $request->get('hsc_board');
         $hscInformation->hsc_percentage = $request->get('hsc_percentage');
@@ -79,6 +80,6 @@ class EducationalInformationHscController extends Controller
         $hscInformation->hsc_year_to = $request->get('hsc_year_to');
         $hscInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/educational-information');
     }
 }

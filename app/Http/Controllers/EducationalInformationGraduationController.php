@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationGraduationController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'graduation_college' => 'required|min:5|max:20',
@@ -24,7 +24,7 @@ class EducationalInformationGraduationController extends Controller
         ]);
 
         Graduation::create([
-            'user_id' => $id,
+            'user_id' => Auth::user()->id,
             'graduation_college' => $request->get('graduation_college'),
             'graduation_university' => $request->get('graduation_university'),
             'graduation_aggregates' => $request->get('graduation_aggregates'),
@@ -34,7 +34,7 @@ class EducationalInformationGraduationController extends Controller
             'graduation_year_to' => $request->get('graduation_year_to'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/students');
+        return redirect('/me/educational-information');
     }
 
     public function show()
@@ -46,20 +46,21 @@ class EducationalInformationGraduationController extends Controller
             return view('student.graduation-form', compact('user', 'graduationInformation'));
         } else {
             // If no data is present then show form
-            return view('student.graduation-form', compact('user', 'actionUrl'));
+            return view('student.graduation-form', compact('user', 'graduationInformation'));
         }
     }
 
-    public function edit()
+    // public function edit()
+    // {
+    //     $user = Auth::user();
+    //     $graduationInformation =  Diploma::where('user_id', $user->id)->get()->first();
+    //     return view('student.graduation-form', compact('user', 'graduationInformation'));
+    // }
+
+    public function update(Request $request)
     {
         $user = Auth::user();
-        $graduationInformation =  Diploma::where('user_id', $user->id)->get()->first();
-        return view('student.graduation-form', compact('user', 'graduationInformation'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $graduationInformation = Graduation::where('user_id', $id)->get()->first();
+        $graduationInformation = Graduation::where('user_id', $user->id)->get()->first();
         $request->validate([
             'graduation_college' => 'required|min:5|max:20',
             'graduation_university' => 'required|min:5|max:20',
@@ -70,7 +71,7 @@ class EducationalInformationGraduationController extends Controller
             'graduation_year_to' => 'required|size:4|digits:4',
         ]);
 
-        $graduationInformation->user_id = $id;
+        $graduationInformation->user_id = $user->id;
         $graduationInformation->graduation_college = $request->get('graduation_college');
         $graduationInformation->graduation_university = $request->get('graduation_university');
         $graduationInformation->graduation_aggregates = $request->get('graduation_aggregates');
@@ -80,6 +81,6 @@ class EducationalInformationGraduationController extends Controller
         $graduationInformation->graduation_year_to = $request->get('graduation_year_to');
         $graduationInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/educational-information');
     }
 }

@@ -32,7 +32,7 @@ class EducationalInformationSscController extends Controller
             'school_year_to' => $request->get('school_year_to'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/me/educational-information');
+        return redirect('/me/ssc');
     }
 
     public function show()
@@ -41,10 +41,10 @@ class EducationalInformationSscController extends Controller
         $sscInformation = Ssc::where('user_id', $user->id)->get()->first();
         if ($sscInformation) {
             // If data is present then show form with data
-            return view('student.education-form-ssc', compact('user', 'sscInformation'));
+            return view('student.education-form', compact('user', 'sscInformation'));
         } else {
             // If no data is present then show empty form
-            return view('student.education-form-ssc', compact('user'));
+            return view('student.education-form', compact('user'));
         }
     }
 
