@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Course extends Model
 {
     use HasFactory;
-    use Concerns\UsesUuid;
-
     protected $guarded = [];
 
     public function university()
@@ -28,5 +26,10 @@ class Course extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function course_information()
+    {
+        return $this->belongsTo(Course::class);
     }
 }
