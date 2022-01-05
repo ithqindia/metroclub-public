@@ -30,7 +30,6 @@ class RefereeDataController extends Controller
         Session::flash('message', 'Data inserted successfully !');
         return redirect('/me/referee');
     }
-
     public function show()
     {
         $user = Auth::user();
@@ -40,8 +39,7 @@ class RefereeDataController extends Controller
             return view('student.referee-form', compact('user', 'referee'));
         } else {
             // If no data is present then show form
-
-            return view('student.referee-form', compact('user', 'referee'));
+            return view('student.referee-form', compact('user'));
         }
     }
     public function update(Request $request)

@@ -28,28 +28,27 @@ class EmployeeDataController extends Controller
             'employment_status' => $request->get('employment_status'),
             'employment_start' => $request->get('employment_start'),
             'employment_end' => $request->get('employment_end'),
-
         ]);
         Session::flash('message', 'Data inserted successfully !');
         return redirect('/me/employee');
     }
 
     public function show()
-    {   $user = Auth::user();
+    {
+        $user = Auth::user();
         $employee = EmployeeDetail::where('user_id', $user->id)->get()->first();
-
-
         if ($employee) {
             // If data is present then show data
             return view('student.employee-form', compact('user', 'employee'));
         } else {
             // If no data is present then show form
-            return view('student.employee-form', compact('user','employee'));
+            return view('student.employee-form', compact('user'));
         }
     }
 
     public function update(Request $request)
-    {   $user = Auth::user();
+    {
+        $user = Auth::user();
         $employee = EmployeeDetail::where('user_id', $user->id)->get()->first();
         $request->validate([
             'employer_name' => 'required',

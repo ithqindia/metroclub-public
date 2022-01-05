@@ -5,7 +5,6 @@
 
 @section('pageTitle', 'Somepage')
 @section('breadcrumbTitle', 'Somepage someting')
-
 @section('main-content')
     @include('student.student-info-panel')
     @if (Session::has('message'))
@@ -113,7 +112,6 @@
                 <a href="/me/employee" class="btn btn-primary  btn-sm mx-3">Add information</a>
             </div>
         @endif
-
     </div>
     {{-- referee details --}}
     <div class="card mb-a8 p-10 my-5">
@@ -197,7 +195,6 @@
                 <a href="/me/referee" class="btn btn-primary  btn-sm mx-3">Add information</a>
             </div>
         @endif
-
     </div>
 @endsection
 @section('scripts')

@@ -44,8 +44,6 @@ Route::get('/test2', function () {
 Route::get('/search', function () {
     return view('frontend.search');
 });
-
-
 Route::middleware(['auth:sanctum'])->group(function () {
     // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
     Route::resource('/web/v1/wishlist/university', WishlistController::class);
@@ -106,7 +104,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get("/me/{route}", [AccountController::class, 'index']);
 });
-
 Route::resource(
     '/web/v1/universities/{country}/{major}/{tags}/all',
     UniversityController::class,
