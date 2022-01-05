@@ -1,6 +1,8 @@
-@extends('layouts.main')
+@extends('student.layout.app')
 @section('main-content')
     <div class="container">
+        <div class="card mb-a8 p-10">
+            <h1>Personal form</h1>
         {{-- <h2>Selfie for {{ $user->name }}</h2> --}}
         <div class="my-2">
             <p> A "Selfie" picture that shows the front of your face in full frame. we'll use this to make sure you match
@@ -29,8 +31,6 @@
                 <img src="/assets/lefthandonchest.jpeg" width="200" height="400" class="rounded float-right" alt="image3">
             </div>
         </div>
-        <div class="card mb-a8 p-10">
-            <h1>Personal form</h1>
         <form method="post" action="/me/selfie">
             @isset($selfieInformation)
                 {{ method_field('PUT') }}

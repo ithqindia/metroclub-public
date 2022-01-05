@@ -9,6 +9,15 @@
 @section('main-content')
     @include('student.student-info-panel')
 
+    @if (Session::has('message'))
+        <div class="alert alert-primary">
+            <div class="d-flex flex-column">
+                <h4 class="mb-1 text-dark">Information!</h4>
+                {{ Session::get('message') }}
+            </div>
+        </div>
+    @endif
+
     <div class="card mb-a8 p-10">
         @if (isset($user->basic_information))
             <div class=" card mb-5 mb-xl-10" id="kt_profile_details_view">
@@ -116,17 +125,19 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <a href="/me/personal-info" class="btn btn-info  btn-sm mx-3">Update</a>
+                </div>
             </div>
         @else
             <h1>No information available</h1>
+            <div>
+                <a href="/me/personal-info" class="btn btn-primary  btn-sm mx-3">Add information</a>
+            </div>
         @endif
-        <div>
-            <a href="/me/personal-info" class="btn btn-info  btn-sm mx-3">Update</a>
-        </div>
     </div>
 
     {{-- local address --}}
-
     <div class="card mb-a8 p-10 my-5">
         @if (isset($user->local_address_data))
             <div class="card-header cursor-pointer">
@@ -200,17 +211,19 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <a href="/me/employee-address" class="btn btn-info  btn-sm mx-3">Update</a>
+                </div>
             </div>
         @else
             <h1>No information available</h1>
+            <div>
+                <a href="/me/employee-address" class="btn btn-primary btn-sm mx-3">Add information</a>
+            </div>
         @endif
-        <div>
-            <a href="/me/employee-address" class="btn btn-info  btn-sm mx-3">Update</a>
-        </div>
     </div>
 
     {{-- Selfie --}}
-
     <div class="card mb-a8 p-10 my-5">
         @if (isset($user->selfie_information))
             <div class=" card mb-5 mb-xl-10" id="kt_profile_details_view">
@@ -227,13 +240,16 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <a href="/me/selfie" class="btn btn-info  btn-sm mx-3">Update</a>
+                </div>
             </div>
         @else
             <h1>No information available</h1>
+            <div>
+                <a href="/me/selfie" class="btn btn-primary btn-sm mx-3">Add information</a>
+            </div>
         @endif
-        <div>
-            <a href="#" class="btn btn-info  btn-sm mx-3">Update</a>
-        </div>
     </div>
 
 @endsection

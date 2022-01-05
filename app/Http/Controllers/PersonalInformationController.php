@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class PersonalInformationController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'salutation' => 'required',
@@ -31,7 +31,7 @@ class PersonalInformationController extends Controller
         ]);
 
         PersonalInformation::create([
-            'user_id' => $id,
+            'user_id' => Auth::user()->id,
             'salutation' => $request->get('salutation'),
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
@@ -49,7 +49,7 @@ class PersonalInformationController extends Controller
             'relationship_status' => $request->get('relationship_status'),
         ]);
         Session::flash('message', 'Data inserted successfully !');
-        return redirect('/students');
+        return redirect('/me/personal-information');
     }
 
     public function show()
@@ -67,18 +67,19 @@ class PersonalInformationController extends Controller
         }
     }
 
-    public function edit()
+    // public function edit()
+    // {
+    //     $user = Auth::user();
+    //     //$actionUrl = "/students/$id/personal-information";
+    //     $personalInformation = PersonalInformation::where('user_id', $user->id)->get()->first();
+    //     //$user = User::find($id);
+    //     return view('student.personal-information-form', compact('user', 'personalInformation'));
+    // }
+
+    public function update(Request $request)
     {
         $user = Auth::user();
-        //$actionUrl = "/students/$id/personal-information";
         $personalInformation = PersonalInformation::where('user_id', $user->id)->get()->first();
-        //$user = User::find($id);
-        return view('student.personal-information-form', compact('user', 'personalInformation'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $personalInformation = PersonalInformation::where('user_id', $id)->get()->first();
         $request->validate([
             'salutation' => 'required',
             'first_name' => 'required',
@@ -97,7 +98,7 @@ class PersonalInformationController extends Controller
             'relationship_status' => 'required',
         ]);
 
-        $personalInformation->user_id = $id;
+        $personalInformation->user_id = $user->id;
         $personalInformation->salutation = $request->get('salutation');
         $personalInformation->first_name = $request->get('first_name');
         $personalInformation->last_name = $request->get('last_name');
@@ -115,6 +116,6 @@ class PersonalInformationController extends Controller
         $personalInformation->relationship_status = $request->get('relationship_status');
         $personalInformation->save();
         Session::flash('message', 'Data updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/personal-information');
     }
 }

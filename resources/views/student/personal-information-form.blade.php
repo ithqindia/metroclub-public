@@ -25,7 +25,7 @@
                     <div class="col-2">
                         <label for="salutation" class="form-label">Salutation<span style="color: red">*</span></label>
                         <select arial-lable="Default select example"
-                            class="custom-select form-control @error('salutation') is-invalide @enderror" name="salutation"
+                            class="custom-select form-control @error('salutation') is-invalid @enderror" name="salutation"
                             id="salutation" value="{{ old('salutation', $personalInformation->salutation ?? '') }}">>
                             <option selected disabled>- Please select -</option>
                             @if (isset($personalInformation))
@@ -250,7 +250,7 @@
                                 <option value="Seprated" @if ($personalInformation->relationship_status == 'Seprated') selected @endif>Seprated</option>
                                 <option value="Widow" @if ($personalInformation->relationship_status == 'Widow') selected @endif>Widow</option>
                             @else
-                                <option value="Married">Single</option>
+                                <option value="Married">Married</option>
                                 <option value="single">Single</option>
                                 <option value="Divorce">Divorce</option>
                                 <option value="Seprated">Seprated</option>

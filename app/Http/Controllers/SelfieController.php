@@ -11,18 +11,18 @@ use Illuminate\Support\Facades\Session;
 
 class SelfieController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'selfie' => 'required',
         ]);
 
         Selfie::create([
-            'user_id' => $id,
+            'user_id' =>Auth::user()->id,
             'selfie' => $request->get('selfie'),
         ]);
         Session::flash('message', 'Data inserted successfully !');
-        return redirect('/students');
+        return redirect('/me/seflie');
     }
 
     public function show()
@@ -40,25 +40,26 @@ class SelfieController extends Controller
         }
     }
 
-    public function edit()
+    // public function edit()
+    // {
+    //     $user = Auth::user();
+    //     //$actionUrl = "/students/$id/selfie-form";
+    //     $selfieInformation = Selfie::where('user_id', $user->id)->get()->first();
+    //     //$user = User::find($id);
+    //     return view('student.selfie-form', compact('user', 'selfieInformation'));
+    // }
+
+    public function update(Request $request)
     {
         $user = Auth::user();
-        //$actionUrl = "/students/$id/selfie-form";
         $selfieInformation = Selfie::where('user_id', $user->id)->get()->first();
-        //$user = User::find($id);
-        return view('student.selfie-form', compact('user', 'selfieInformation'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $selfieInformation = Selfie::where('user_id', $id)->get()->first();
         $request->validate([
             'selfie' => 'required',
         ]);
-        $selfieInformation->$id;
+        $selfieInformation->user_id = $user->id;
         $selfieInformation->selfie = $request->get('selfie');
         $selfieInformation->save();
         Session::flash('message', 'Data updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/personal-information');
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LocalAddressController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'local_address' => 'required|min:10|max:100',
@@ -24,7 +24,7 @@ class LocalAddressController extends Controller
             'local_emergency_relationship' => 'required',
         ]);
         LocalAddressData::create([
-            'user_id' => $id,
+            'user_id' =>Auth::user()->id,
             'local_address' => $request->get('local_address'),
             'local_apartment' => $request->get('local_apartment'),
             'local_city' => $request->get('local_city'),
@@ -36,7 +36,7 @@ class LocalAddressController extends Controller
             'local_emergency_relationship' => $request->get('local_emergency_relationship'),
         ]);
         Session::flash('message', 'Data inserted successfully !');
-        return redirect('/students');
+        return redirect('/me/employee-address');
     }
 
     public function show()
@@ -55,18 +55,19 @@ class LocalAddressController extends Controller
         }
     }
 
-    public function edit()
-    {
-        //$actionUrl = "/students/$id/employee-address-form";
-        $localAddress = LocalAddressData::where('user_id', $user->id)->get()->first();
-        //$user = User::find($id);
-        $user = Auth::user();
-        return view('student.employee-address-form', compact('user', 'localAddress'));
-    }
+    // public function edit()
+    // {
+    //     //$actionUrl = "/students/$id/employee-address-form";
+    //     $localAddress = LocalAddressData::where('user_id', $user->id)->get()->first();
+    //     //$user = User::find($id);
+    //     $user = Auth::user();
+    //     return view('student.employee-address-form', compact('user', 'localAddress'));
+    // }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $localAddress = LocalAddressData::where('user_id', $id)->get()->first();
+        $user = Auth::user();
+        $localAddress = LocalAddressData::where('user_id', $user->id)->get()->first();
         $request->validate([
             'local_address' => 'required|min:10|max:100',
             'local_apartment' => 'required',
@@ -79,7 +80,7 @@ class LocalAddressController extends Controller
             'local_emergency_relationship' => 'required',
         ]);
 
-        $localAddress->user_id = $id;
+        $localAddress->user_id = $user->id;
         $localAddress->local_apartment = $request->get('local_apartment');
         $localAddress->local_address = $request->get('local_address');
         $localAddress->local_city = $request->get('local_city');
@@ -91,6 +92,6 @@ class LocalAddressController extends Controller
         $localAddress->local_emergency_relationship = $request->get('local_emergency_relationship');
         $localAddress->save();
         Session::flash('message', 'Data updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/personal-information');
     }
 }
