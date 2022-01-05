@@ -15,6 +15,7 @@ class EducationalInformationSscController extends Controller
             'ssc_school' => 'required|min:5|max:20',
             'ssc_board' => 'required|min:5|max:20',
             'ssc_percentage' => 'required|size:2|digits:2',
+            'out_of' => 'required|size:2|digits:2',
             'ssc_major' => 'required|min:5|max:20',
             'ssc_langauge' => 'required|min:5|max:20',
             'school_year_form' => 'required|size:4|digits:4',
@@ -26,6 +27,7 @@ class EducationalInformationSscController extends Controller
             'ssc_school' => $request->get('ssc_school'),
             'ssc_board' => $request->get('ssc_board'),
             'ssc_percentage' => $request->get('ssc_percentage'),
+            'out_of' => $request->get('out_of'),
             'ssc_major' => $request->get('ssc_major'),
             'ssc_langauge' => $request->get('ssc_langauge'),
             'school_year_form' => $request->get('school_year_form'),
@@ -57,6 +59,7 @@ class EducationalInformationSscController extends Controller
             'ssc_school' => 'required|min:5|max:20',
             'ssc_board' => 'required|min:5|max:20',
             'ssc_percentage' => 'required|size:2|digits:2',
+            'out_of' => 'required|size:2|digits:2',
             'ssc_major' => 'required|min:5|max:20',
             'ssc_langauge' => 'required|min:5|max:20',
             'school_year_form' => 'required|size:4|digits:4',
@@ -67,6 +70,7 @@ class EducationalInformationSscController extends Controller
         $sscInformation->ssc_school = $request->get('ssc_school');
         $sscInformation->ssc_board = $request->get('ssc_board');
         $sscInformation->ssc_percentage = $request->get('ssc_percentage');
+        $sscInformation->out_of = $request->get('out_of');
         $sscInformation->ssc_major = $request->get('ssc_major');
         $sscInformation->ssc_langauge = $request->get('ssc_langauge');
         $sscInformation->school_year_form = $request->get('school_year_form');

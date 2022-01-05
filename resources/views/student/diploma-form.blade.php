@@ -33,13 +33,24 @@
                 </div>
             </div>
             <div class="row my-5">
-                <div class="col-6">
+                <div class="col-3">
                     <label for="inputAggregates" class="form-label">Aggregates<span
                             style="color:red; font-size:20px">*</span></label>
                     <input type="text" class="form-control @error('diploma_aggregates') is-invalid @enderror"
                         id="input_aggregates_diploma" name="diploma_aggregates"
                         value="{{ old('diploma_aggregates', $diplomaInformation->diploma_aggregates ?? '') }}">
                     @error('diploma_aggregates')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="col-3">
+                    <label for="inputOutof" class="form-label">Out of<span
+                            style="color:red; font-size:20px">*</span></label>
+                    <input type="text" class="form-control @error('out_of') is-invalid @enderror" id="input_out_of"
+                        name="out_of" value="{{ old('out_of', $diplomaInformation->out_of ?? '') }}">
+                    @error('out_of')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -52,6 +63,20 @@
                         id="input_major_diploma" name="diploma_major"
                         value="{{ old('diploma_major', $diplomaInformation->diploma_major ?? '') }}">
                     @error('diploma_major')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="row my-5">
+                <div class="col-12">
+                    <label for="inputMajor" class="form-label">Major title<span
+                            style="color:red; font-size:20px">*</span></label>
+                    <input type="text" class="form-control @error('major_title') is-invalid @enderror"
+                        id="input_major_title" name="major_title"
+                        value="{{ old('major_title', $diplomaInformation->major_title ?? '') }}">
+                    @error('major_title')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -100,7 +125,7 @@
                 <div class="col-md-4">
                     <label for="inputYearto" class="form-label">Status<span
                             style="color:red; font-size:20px">*</span></label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="completion_status">
                         <option selected disabled>- Please select -</option>
                         <option value="Completed">Completed</option>
                         <option value="Studying">Studying</option>

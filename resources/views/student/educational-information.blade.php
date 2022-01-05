@@ -40,9 +40,16 @@
                         </div>
                     </div>
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-bold text-muted">Percentage</label>
+                        <label class="col-lg-4 fw-bold text-muted">Aggregates</label>
                         <div class="col-lg-8">
                             <span class="fw-bolder fs-6 text-gray-800">{{ $user->ssc_information->ssc_percentage }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Out of</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->ssc_information->out_of }}
                             </span>
                         </div>
                     </div>
@@ -112,9 +119,16 @@
                         </div>
                     </div>
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-bold text-muted">Percentage</label>
+                        <label class="col-lg-4 fw-bold text-muted">Aggregates</label>
                         <div class="col-lg-8">
                             <span class="fw-bolder fs-6 text-gray-800">{{ $user->hsc_information->hsc_percentage }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Out of</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->hsc_information->out_of }}
                             </span>
                         </div>
                     </div>
@@ -184,7 +198,7 @@
                         </div>
                     </div>
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-bold text-muted">Percentage</label>
+                        <label class="col-lg-4 fw-bold text-muted">Aggregates</label>
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->diploma_information->diploma_aggregates }}
@@ -192,9 +206,23 @@
                         </div>
                     </div>
                     <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Out of</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->diploma_information->out_of }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted">Major</label>
                         <div class="col-lg-8">
                             <span class="fw-bolder fs-6 text-gray-800">{{ $user->diploma_information->diploma_major }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Major title</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->diploma_information->major_title }}
                             </span>
                         </div>
                     </div>
@@ -218,6 +246,14 @@
                         <label class="col-lg-4 fw-bold text-muted">Year to</label>
                         <div class="col-lg-8">
                             <span class="fw-bolder fs-6 text-gray-800">{{ $user->diploma_information->diploma_year_to }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Status</label>
+                        <div class="col-lg-8">
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->diploma_information->completion_status }}
                             </span>
                         </div>
                     </div>
@@ -262,10 +298,17 @@
                         </div>
                     </div>
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-bold text-muted">Percentage</label>
+                        <label class="col-lg-4 fw-bold text-muted">Aggregates</label>
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->graduation_information->graduation_aggregates }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Out of</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->graduation_information->out_of }}
                             </span>
                         </div>
                     </div>
@@ -274,6 +317,13 @@
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->graduation_information->graduation_major }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Major title</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->graduation_information->major_title }}
                             </span>
                         </div>
                     </div>
@@ -298,6 +348,14 @@
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->graduation_information->graduation_year_to }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Status</label>
+                        <div class="col-lg-8">
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->graduation_information->completion_status }}
                             </span>
                         </div>
                     </div>
@@ -342,10 +400,17 @@
                         </div>
                     </div>
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-bold text-muted">Percentage</label>
+                        <label class="col-lg-4 fw-bold text-muted">Aggregates</label>
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->post_graduation_information->post_graduation_aggregates }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Out of</label>
+                        <div class="col-lg-8">
+                            <span class="fw-bolder fs-6 text-gray-800">{{ $user->post_graduation_information->out_of }}
                             </span>
                         </div>
                     </div>
@@ -354,6 +419,14 @@
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->post_graduation_information->post_graduation_major }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Major title</label>
+                        <div class="col-lg-8">
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->post_graduation_information->major_title }}
                             </span>
                         </div>
                     </div>
@@ -378,6 +451,14 @@
                         <div class="col-lg-8">
                             <span
                                 class="fw-bolder fs-6 text-gray-800">{{ $user->post_graduation_information->post_graduation_year_to }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted">Status</label>
+                        <div class="col-lg-8">
+                            <span
+                                class="fw-bolder fs-6 text-gray-800">{{ $user->post_graduation_information->completion_status }}
                             </span>
                         </div>
                     </div>

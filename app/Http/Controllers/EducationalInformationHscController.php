@@ -16,6 +16,7 @@ class EducationalInformationHscController extends Controller
             'hsc_college' => 'required|min:5|max:20',
             'hsc_board' => 'required|min:5|max:20',
             'hsc_percentage' => 'required|numeric|between:0,99.99',
+            'out_of' => 'required|size:2|digits:2',
             'hsc_major' => 'required|min:5|max:20',
             'hsc_langauge' => 'required|min:3|max:20',
             'hsc_year_form' => 'required|size:4|digits:4',
@@ -27,6 +28,7 @@ class EducationalInformationHscController extends Controller
             'hsc_college' => $request->get('hsc_college'),
             'hsc_board' => $request->get('hsc_board'),
             'hsc_percentage' => $request->get('hsc_percentage'),
+            'out_of' => $request->get('out_of'),
             'hsc_major' => $request->get('hsc_major'),
             'hsc_langauge' => $request->get('hsc_langauge'),
             'hsc_year_form' => $request->get('hsc_year_form'),
@@ -49,13 +51,6 @@ class EducationalInformationHscController extends Controller
         }
     }
 
-    // public function edit()
-    // {
-    //     $user = Auth::user();
-    //     $hscInformation =  Hsc::where('user_id', $user->id)->get()->first();
-    //     return view('student.hsc-form', compact('user', 'hscInformation'));
-    // }
-
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -64,6 +59,7 @@ class EducationalInformationHscController extends Controller
             'hsc_college' => 'required|min:5|max:20',
             'hsc_board' => 'required|min:5|max:20',
             'hsc_percentage' => 'required|numeric|between:0,99.99',
+            'out_of' => 'required|size:2|digits:2',
             'hsc_major' => 'required|min:5|max:20',
             'hsc_langauge' => 'required|min:3|max:20',
             'hsc_year_form' => 'required|size:4|digits:4',
@@ -74,6 +70,7 @@ class EducationalInformationHscController extends Controller
         $hscInformation->hsc_college = $request->get('hsc_college');
         $hscInformation->hsc_board = $request->get('hsc_board');
         $hscInformation->hsc_percentage = $request->get('hsc_percentage');
+        $hscInformation->out_of = $request->get('out_of');
         $hscInformation->hsc_major = $request->get('hsc_major');
         $hscInformation->hsc_langauge = $request->get('hsc_langauge');
         $hscInformation->hsc_year_form = $request->get('hsc_year_form');

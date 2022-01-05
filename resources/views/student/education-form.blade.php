@@ -37,13 +37,24 @@
                 </div>
 
                 <div class="row my-5">
-                    <div class="col-lg-6">
-                        <label for="inputAggregates" class="form-label">Percentage<span
+                    <div class="col-lg-3">
+                        <label for="inputAggregates" class="form-label">Aggregates<span
                                 style="color:red; font-size:20px">*</span></label>
                         <input type="text" class="form-control @error('ssc_percentage') is-invalid @enderror"
                             id="input_aggregates_ssc" name="ssc_percentage"
                             value="{{ old('ssc_percentage', $sscInformation->ssc_percentage ?? '') }}">
                         @error('ssc_percentage')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="inputOutof" class="form-label">Out of<span
+                                style="color:red; font-size:20px">*</span></label>
+                        <input type="text" class="form-control @error('out_of') is-invalid @enderror" id="input_out_of"
+                            name="out_of" value="{{ old('out_of', $sscInformation->out_of ?? '') }}">
+                        @error('out_of')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>

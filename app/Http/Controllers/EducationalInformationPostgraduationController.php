@@ -17,10 +17,13 @@ class EducationalInformationPostgraduationController extends Controller
             'post_graduation_college' => 'required|min:5|max:20',
             'post_graduation_university' => 'required|min:5|max:20',
             'post_graduation_aggregates' => 'required|numeric|between:0,99.99',
+            'out_of' => 'required|size:2|digits:2',
             'post_graduation_major' => 'required|min:5|max:20',
+            'major_title' => 'required|min:4|max:20',
             'post_graduation_langauge' => 'required|min:3|max:20',
             'post_graduation_year_from' => 'required|size:4|digits:4',
             'post_graduation_year_to' => 'required|size:4|digits:4',
+            'completion_status' => 'required',
         ]);
 
         PostGraduation::create([
@@ -28,10 +31,13 @@ class EducationalInformationPostgraduationController extends Controller
             'post_graduation_college' => $request->get('post_graduation_college'),
             'post_graduation_university' => $request->get('post_graduation_university'),
             'post_graduation_aggregates' => $request->get('post_graduation_aggregates'),
+            'out_of' => $request->get('out_of'),
             'post_graduation_major' => $request->get('post_graduation_major'),
+            'major_title' => $request->get('major_title'),
             'post_graduation_langauge' => $request->get('post_graduation_langauge'),
             'post_graduation_year_from' => $request->get('post_graduation_year_from'),
             'post_graduation_year_to' => $request->get('post_graduation_year_to'),
+            'completion_status' => $request->get('completion_status'),
         ]);
         Session::flash('message', 'Data added successfully !');
         return redirect('/me/educational-information');
@@ -50,21 +56,6 @@ class EducationalInformationPostgraduationController extends Controller
         }
     }
 
-    // public function edit($id)
-    // {
-    //     $actionUrl = "/students/$id/post-graduation-form";
-    //     $postGraduationInformation = PostGraduation::where('user_id', $id)->get()->first();
-    //     $user = User::find($id);
-    //     return view('post-graduation-form', compact('user', 'postGraduationInformation', 'actionUrl'));
-    // }
-
-    // public function edit()
-    // {
-    //     $user = Auth::user();
-    //     $postGraduationInformation =  PostGraduation::where('user_id', $user->id)->get()->first();
-    //     return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
-    // }
-
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -73,20 +64,26 @@ class EducationalInformationPostgraduationController extends Controller
             'post_graduation_college' => 'required|min:5|max:20',
             'post_graduation_university' => 'required|min:5|max:20',
             'post_graduation_aggregates' => 'required|numeric|between:0,99.99',
+            'out_of' => 'required|size:2|digits:2',
             'post_graduation_major' => 'required|min:5|max:20',
+            'major_title' => 'required|min:4|max:20',
             'post_graduation_langauge' => 'required|min:3|max:20',
             'post_graduation_year_from' => 'required|size:4|digits:4',
             'post_graduation_year_to' => 'required|size:4|digits:4',
+            'completion_status' => 'required',
         ]);
 
         $postGraduationInformation->user_id = $user->id;
         $postGraduationInformation->post_graduation_college = $request->get('post_graduation_college');
         $postGraduationInformation->post_graduation_university = $request->get('post_graduation_university');
         $postGraduationInformation->post_graduation_aggregates = $request->get('post_graduation_aggregates');
+        $postGraduationInformation->out_of = $request->get('out_of');
         $postGraduationInformation->post_graduation_major = $request->get('post_graduation_major');
+        $postGraduationInformation->major_title = $request->get('major_title');
         $postGraduationInformation->post_graduation_langauge = $request->get('post_graduation_langauge');
         $postGraduationInformation->post_graduation_year_from = $request->get('post_graduation_year_from');
         $postGraduationInformation->post_graduation_year_to = $request->get('post_graduation_year_to');
+        $postGraduationInformation->completion_status = $request->get('completion_status');
         $postGraduationInformation->save();
         Session::flash('message', 'Data Updated successfully !');
         return redirect('/me/educational-information');
