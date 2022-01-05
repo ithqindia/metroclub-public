@@ -2,42 +2,98 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\Country;
 use App\Models\University;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UniversityResource;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class UniversityController extends Controller
 {
-    public function index(Request $request, $country, $major, $tags)
+    public function index()
     {
-        // Get all universities for $country
-        $countryUniversities = University::where(
-            ['country_id' => $country, 'is_enabled' => 1]
-        )->get()->pluck('id');
-
-        $tagIds = explode("|", $tags);
-
-        // Get all courses id where $course where $major
-        $courses = Course::where([
-            'is_enabled' => 1,
-            'course_major_id' => $major
-        ])
-            ->whereIn('university_id', $countryUniversities)
-            ->whereHas('tags', function ($q) use ($tagIds) {
-                $q->whereIn('tag_id', $tagIds);
-            })
-            ->get()
-            ->sortBy('name');
-
-        $universities = University::whereIn('id', $courses->pluck('university_id'))
-            ->with('courses', 'country')->get();
-        return UniversityResource::collection($universities)->all();
+        $universities = University::paginate(20);
+        return view('universities', compact('universities'));
     }
 
-    public function show(University $university)
+    public function create()
     {
-        //
+        $actionUrl = '/universities';
+        $countries = Country::get();
+        return view('universities-form', compact('actionUrl', 'countries'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'city' => 'required',
+            'country_id' => 'required',
+        ]);
+
+        $path = '';
+        // Validate if file is uploaded
+        if ($request->file('logo')->isValid()) {
+            //$path = Storage::putFile('folderName_change_as_required', $request->file('logo'));
+            $path = $request->file('logo')->store(University::$imageFolder);
+        } else {
+            // TODO later
+        }
+
+        University::create([
+            'name' => $request->get('name'),
+            'city' => $request->get('city'),
+            'details' => $request->get('details'),
+            //'logo' => $path,
+            'logo' =>  '/storage/' . $path,
+            'country_id' => $request->get('country_id'),
+            'is_enabled' => (bool)$request->get('is_enabled'),
+        ]);
+
+        Session::flash('message', 'Data added successfully !');
+        return redirect('/universities');
+    }
+
+    public function show($id)
+    {
+        $university = University::with(['country', 'courses'])->find($id);
+        $countries = Country::get();
+        return view('university', compact('university', 'countries'));
+    }
+
+    public function edit($id)
+    {
+        $university = University::find($id);
+        $actionUrl = '/universities/' . $id;
+        $countries = Country::get();
+        return view('universities-form', compact('university', 'actionUrl', 'countries'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $university = University::find($id);
+        $request->validate([
+            'name' => 'required',
+            'city' => 'required',
+            'country_id' => 'required',
+        ]);
+
+        $university->name = $request->get('name');
+        $university->city = $request->get('city');
+        $university->details = $request->get('details');
+        $university->logo = $request->get('logo');
+        $university->country_id = $request->get('country_id');
+        $university->is_enabled = (bool)$request->get('is_enabled');
+        $university->save();
+        Session::flash('message', 'Data updated successfully !');
+        return redirect('/universities');
+    }
+
+    public function destroy($id)
+    {
+        University::find($id)->delete();
+        Session::flash('message', 'Data deleted successfully !');
+        return redirect('/universities');
     }
 }
