@@ -8,16 +8,15 @@
 
 @section('main-content')
     @include('student.student-info-panel')
-    <div class="card mb-a8 p-10 my-5">
-        @if (Session::has('message'))
-            <div class="alert alert-primary">
-                <div class="d-flex flex-column">
-                    <h4 class="mb-1 text-dark">Information!</h4>
-                    {{ Session::get('message') }}
-                </div>
+    @if (Session::has('message'))
+        <div class="alert alert-primary">
+            <div class="d-flex flex-column">
+                <h4 class="mb-1 text-dark">Information!</h4>
+                {{ Session::get('message') }}
             </div>
-        @endif
-
+        </div>
+    @endif
+    <div class="card mb-a8 p-10 my-5">
         @if (isset($user->employee_data))
             <div class=" card mb-5 mb-xl-10" id="kt_profile_details_view">
                 <div class="card-header cursor-pointer">
@@ -57,8 +56,8 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8">
-                            <a href="#"
-                                class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ $user->employee_data->job_title }}</a>
+                            <span href="#"
+                                class="fw-bold fs-6 text-gray-800 text-muted">{{ $user->employee_data->job_title }}</span>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -104,13 +103,17 @@
                     </div>
                     <!--end::Input group-->
                 </div>
+                <div>
+                    <a href="/me/employee" class="btn btn-info  btn-sm mx-3">Update</a>
+                </div>
             </div>
         @else
             <h1>No information available</h1>
+            <div>
+                <a href="/me/employee" class="btn btn-primary  btn-sm mx-3">Add information</a>
+            </div>
         @endif
-        <div>
-            <a href="/me/employee" class="btn btn-info  btn-sm mx-3">Update</a>
-        </div>
+
     </div>
     {{-- referee details --}}
     <div class="card mb-a8 p-10 my-5">
@@ -153,8 +156,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8">
-                            <a href="#"
-                                class="fw-bold fs-6 text-gray-800 text-hover-primary">{{ $user->referee_data->email_address }}</a>
+                            <span class="fw-bold fs-6 text-gray-800 ">{{ $user->referee_data->email_address }}<span>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -185,13 +187,17 @@
                     </div>
                     <!--end::Input group-->
                 </div>
+                <div>
+                    <a href="/me/employee" class="btn btn-info  btn-sm mx-3">Update</a>
+                </div>
             </div>
         @else
             <h1>No information available</h1>
+            <div>
+                <a href="/me/referee" class="btn btn-primary  btn-sm mx-3">Add information</a>
+            </div>
         @endif
-        <div>
-            <a href="/me/referee" class="btn btn-info  btn-sm mx-3">Update</a>
-        </div>
+
     </div>
 @endsection
 @section('scripts')

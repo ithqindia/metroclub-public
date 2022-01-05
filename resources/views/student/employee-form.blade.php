@@ -61,7 +61,7 @@
                                 <label for="employment_status" class="form-label">Employment status<span
                                         style=color:red>*</span></label>
                                 <select aria-label="Default select example"
-                                    class="form-select form-control @error('employment_status') is-valid @enderror"
+                                    class="form-select form-control @error('employment_status') is-invalid @enderror"
                                     name="employment_status" id="employment_status"
                                     value="{{ old('employment_status', $employee->employment_status ?? '') }}">
                                     <option selected disabled>- Please select -</option>
@@ -78,7 +78,6 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-
                             </div>
                         </div>
                         <div class="row mt-5  mb-5">

@@ -50,14 +50,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route::resource('/v1/dummy', DummyApiController::class, ['only' => ['index']]);
     Route::resource('/web/v1/wishlist/university', WishlistController::class);
     Route::resource('/web/v1/comment', CommentController::class);
-
-    Route::get("/me/referee", [RefereeDataController::class, 'edit']);
+    // referee
+    Route::get("/me/referee", [RefereeDataController::class, 'show']);
+    Route::get("/me/referee/edit", [RefereeDataController::class, 'edit']);
     Route::post("/me/referee", [RefereeDataController::class, 'store']);
     Route::put("/me/referee", [RefereeDataController::class, 'update']);
 
-
+    // employee
+    Route::get("/me/employee", [EmployeeDataController::class, 'show']);
     Route::post("/me/employee", [EmployeeDataController::class, 'store']);
-    Route::get("/me/employee", [EmployeeDataController::class, 'edit']);
+    Route::get("/me/employee/edit", [EmployeeDataController::class, 'edit']);
     Route::put("/me/employee", [EmployeeDataController::class, 'update']);
     // ssc
     Route::get("/me/ssc", [EducationalInformationSscController::class, 'show']);

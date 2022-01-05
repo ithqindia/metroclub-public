@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class RefereeDataController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $request->validate([
             'first_name' => 'required',
@@ -20,7 +20,7 @@ class RefereeDataController extends Controller
             'email_address' => 'required|email',
         ]);
         RefereeDetail::create([
-            'user_id' => $id,
+            'user_id' => Auth::user()->id,
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'organisation' => $request->get('organisation'),
@@ -28,34 +28,26 @@ class RefereeDataController extends Controller
             'email_address' => $request->get('email_address'),
         ]);
         Session::flash('message', 'Data inserted successfully !');
-        return redirect('/students');
+        return redirect('/me/referee');
     }
 
-    public function show($id)
-    {
-        $referee =   RefereeDetail::where('user_id', $id)->get()->first();
-        $user = User::find($id);
-
-        if ($referee) {
-            // If data is present then show data
-            return view('referee', compact('user', 'referee'));
-        } else {
-            // If no data is present then show form
-            $actionUrl = "/students/$id/referee-form";
-            return view('referee-form', compact('user', 'actionUrl'));
-        }
-    }
-
-    public function edit()
+    public function show()
     {
         $user = Auth::user();
-        $referee =  RefereeDetail::where('user_id', $user->id)->get()->first();
-        return view('student.referee-form', compact('user', 'referee'));
-    }
+        $referee =   RefereeDetail::where('user_id', $user->id)->get()->first();
+        if ($referee) {
+            // If data is present then show data
+            return view('student.referee-form', compact('user', 'referee'));
+        } else {
+            // If no data is present then show form
 
-    public function update(Request $request, $id)
+            return view('student.referee-form', compact('user', 'referee'));
+        }
+    }
+    public function update(Request $request)
     {
-        $referee = RefereeDetail::where('user_id', $id)->get()->first();
+        $user = Auth::user();
+        $referee = RefereeDetail::where('user_id', $user->id)->get()->first();
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -64,7 +56,7 @@ class RefereeDataController extends Controller
             'email_address' => 'required|email',
         ]);
 
-        $referee->user_id = $id;
+        $referee->user_id = $user->id;
         $referee->first_name = $request->get('first_name');
         $referee->last_name = $request->get('last_name');
         $referee->organisation = $request->get('organisation');
@@ -72,6 +64,6 @@ class RefereeDataController extends Controller
         $referee->email_address = $request->get('email_address');
         $referee->save();
         Session::flash('message', 'Data updated successfully !');
-        return redirect('/students/' . $id);
+        return redirect('/me/employment-information');
     }
 }

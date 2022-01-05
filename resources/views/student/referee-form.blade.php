@@ -7,7 +7,7 @@
             {{-- referee information start --}}
             <section class="my-5">
                 <div class="container my-5">
-                    <form class="row g-3 needs-validation" method="post" action="/me/refree">
+                    <form class="row g-3 needs-validation" method="post" action="/me/referee">
                         @csrf
                         {{-- update code --}}
                         @isset($referee)
@@ -83,7 +83,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         {{-- submit --}}
                         <div class="col-12 mt-5  mb-5">
                             <button type="submit" class="btn btn-primary" id="permanent_submit"> Submit</button>
