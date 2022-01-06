@@ -1,4 +1,6 @@
 @extends ('student.layout.app')
+@section('pageTitle', 'Hsc form')
+@section('breadcrumbTitle', 'Hsc form')
 @section('main-content')
     <div class="accordion container my-3" id="accordion_container">
         <form class="row g-3" method="post" action="/me/hsc">
