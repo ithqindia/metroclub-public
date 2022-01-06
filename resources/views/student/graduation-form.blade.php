@@ -2,6 +2,7 @@
 @section('pageTitle', 'Graduation form')
 @section('breadcrumbTitle', 'Graduation form')
 @section('main-content')
+@include('student.student-info-panel')
     <div class="accordion container my-3" id="accordion_container">
         <form class="row g-3" method="post" action="/me/graduation">
             @csrf

@@ -87,7 +87,7 @@
                 </div>
             </div>
         @else
-            <h1>No information available</h1>
+            <h1>SSC information not added</h1>
             <div>
                 <a href="/me/ssc" class="btn btn-info  btn-sm mx-3">Add information</a>
             </div>
@@ -166,7 +166,7 @@
                 </div>
             </div>
         @else
-            <h1>No information available</h1>
+            <h1>HSC information not added</h1>
             <div>
                 <a href="/me/hsc" class="btn btn-info  btn-sm mx-3">Add information</a>
             </div>
@@ -263,7 +263,7 @@
                 </div>
             </div>
         @else
-            <h1>No information available</h1>
+            <h1>Diploma information not added</h1>
             <div>
                 <a href="/me/diploma" class="btn btn-info  btn-sm mx-3">Add information</a>
             </div>
@@ -365,7 +365,7 @@
                 </div>
             </div>
         @else
-            <h1>No information available</h1>
+            <h1>Graduation information not added</h1>
             <div>
                 <a href="/me/graduation" class="btn btn-info  btn-sm mx-3">Add information</a>
             </div>
@@ -468,7 +468,7 @@
                 </div>
             </div>
         @else
-            <h1>No information available</h1>
+            <h1>Post graduation information not added</h1>
             <div>
                 <a href="/me/postGraduation" class="btn btn-info  btn-sm mx-3">Add information</a>
             </div>
