@@ -13,12 +13,12 @@ class EducationalInformationHscController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hsc_college' => 'required|min:5|max:20',
-            'hsc_board' => 'required|min:5|max:20',
+            'hsc_college' => 'required|min:5|max:254',
+            'hsc_board' => 'required|min:5|max:254',
             'hsc_percentage' => 'required|numeric|between:0,99.99',
-            'out_of' => 'required|size:2|digits:2',
-            'hsc_major' => 'required|min:5|max:20',
-            'hsc_langauge' => 'required|min:3|max:20',
+            'out_of' => 'required',
+            'hsc_major' => 'required|min:5|max:254',
+            'hsc_langauge' => 'required|min:3|max:254',
             'hsc_year_form' => 'required|size:4|digits:4',
             'hsc_year_to' => 'required|size:4|digits:4',
         ]);
@@ -56,12 +56,12 @@ class EducationalInformationHscController extends Controller
         $user = Auth::user();
         $hscInformation = Hsc::where('user_id', $user->id)->get()->first();
         $request->validate([
-            'hsc_college' => 'required|min:5|max:20',
-            'hsc_board' => 'required|min:5|max:20',
+            'hsc_college' => 'required|min:5|max:254',
+            'hsc_board' => 'required|min:5|max:254',
             'hsc_percentage' => 'required|numeric|between:0,99.99',
-            'out_of' => 'required|size:2|digits:2',
-            'hsc_major' => 'required|min:5|max:20',
-            'hsc_langauge' => 'required|min:3|max:20',
+            'out_of' => 'required',
+            'hsc_major' => 'required|min:5|max:254',
+            'hsc_langauge' => 'required|min:3|max:254',
             'hsc_year_form' => 'required|size:4|digits:4',
             'hsc_year_to' => 'required|size:4|digits:4',
         ]);

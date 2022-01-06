@@ -13,13 +13,13 @@ class EducationalInformationDiplomaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'diploma_college' => 'required|min:5|max:20',
-            'diploma_university' => 'required|min:5|max:20',
+            'diploma_college' => 'required|min:5|max:254',
+            'diploma_university' => 'required|min:5|max:254',
             'diploma_aggregates' => 'required|numeric|between:0,99.99',
-            'out_of' => 'required|size:4|digits:3',
-            'diploma_major' => 'required|min:5|max:20',
-            'major_title' => 'required|min:4|max:20',
-            'diploma_langauge' => 'required|min:3|max:20',
+            'out_of' => 'required',
+            'diploma_major' => 'required|min:5|max:254',
+            'major_title' => 'required|min:4|max:254',
+            'diploma_langauge' => 'required|min:3|max:254',
             'diploma_year_form' => 'required|size:4|digits:4',
             'diploma_year_to' => 'required|size:4|digits:4',
             'completion_status' => 'required',
@@ -61,13 +61,13 @@ class EducationalInformationDiplomaController extends Controller
         $user = Auth::user();
         $diplomaInformation = Diploma::where('user_id', $user->id)->get()->first();
         $request->validate([
-            'diploma_college' => 'required|min:5|max:20',
-            'diploma_university' => 'required|min:5|max:20',
+            'diploma_college' => 'required|min:5|max:254',
+            'diploma_university' => 'required|min:5|max:254',
             'diploma_aggregates' => 'required|numeric|between:0,99.99',
-            'out_of' => 'required|size:2|digits:2',
-            'diploma_major' => 'required|min:5|max:20',
-            'major_title' => 'required|min:4|max:20',
-            'diploma_langauge' => 'required|min:3|max:20',
+            'out_of' => 'required',
+            'diploma_major' => 'required|min:5|max:254',
+            'major_title' => 'required|min:4|max:254',
+            'diploma_langauge' => 'required|min:3|max:254',
             'diploma_year_form' => 'required|size:4|digits:4',
             'diploma_year_to' => 'required|size:4|digits:4',
             'completion_status' => 'required',

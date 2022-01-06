@@ -14,13 +14,13 @@ class EducationalInformationPostgraduationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'post_graduation_college' => 'required|min:5|max:20',
-            'post_graduation_university' => 'required|min:5|max:20',
+            'post_graduation_college' => 'required|min:5|max:254',
+            'post_graduation_university' => 'required|min:5|max:254',
             'post_graduation_aggregates' => 'required|numeric|between:0,99.99',
-            'out_of' => 'required|size:2|digits:2',
-            'post_graduation_major' => 'required|min:5|max:20',
-            'major_title' => 'required|min:4|max:20',
-            'post_graduation_langauge' => 'required|min:3|max:20',
+            'out_of' => 'required',
+            'post_graduation_major' => 'required|min:5|max:254',
+            'major_title' => 'required|min:4|max:254',
+            'post_graduation_langauge' => 'required|min:3|max:254',
             'post_graduation_year_from' => 'required|size:4|digits:4',
             'post_graduation_year_to' => 'required|size:4|digits:4',
             'completion_status' => 'required',
@@ -61,13 +61,13 @@ class EducationalInformationPostgraduationController extends Controller
         $user = Auth::user();
         $postGraduationInformation = PostGraduation::where('user_id', $user->id)->get()->first();
         $request->validate([
-            'post_graduation_college' => 'required|min:5|max:20',
-            'post_graduation_university' => 'required|min:5|max:20',
+            'post_graduation_college' => 'required|min:5|max:254',
+            'post_graduation_university' => 'required|min:5|max:254',
             'post_graduation_aggregates' => 'required|numeric|between:0,99.99',
-            'out_of' => 'required|size:2|digits:2',
-            'post_graduation_major' => 'required|min:5|max:20',
-            'major_title' => 'required|min:4|max:20',
-            'post_graduation_langauge' => 'required|min:3|max:20',
+            'out_of' => 'required',
+            'post_graduation_major' => 'required|min:5|max:254',
+            'major_title' => 'required|min:4|max:254',
+            'post_graduation_langauge' => 'required|min:3|max:254',
             'post_graduation_year_from' => 'required|size:4|digits:4',
             'post_graduation_year_to' => 'required|size:4|digits:4',
             'completion_status' => 'required',

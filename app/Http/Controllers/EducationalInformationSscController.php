@@ -12,12 +12,12 @@ class EducationalInformationSscController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ssc_school' => 'required|min:5|max:20',
-            'ssc_board' => 'required|min:5|max:20',
+            'ssc_school' => 'required|min:5|max:254',
+            'ssc_board' => 'required|min:5|max:254',
             'ssc_percentage' => 'required|size:2|digits:2',
-            'out_of' => 'required|size:2|digits:2',
-            'ssc_major' => 'required|min:5|max:20',
-            'ssc_langauge' => 'required|min:5|max:20',
+            'out_of' => 'required',
+            'ssc_major' => 'required|min:5|max:254',
+            'ssc_langauge' => 'required|min:5|max:254',
             'school_year_form' => 'required|size:4|digits:4',
             'school_year_to' => 'required|size:4|digits:4',
         ]);
@@ -56,12 +56,12 @@ class EducationalInformationSscController extends Controller
         $sscInformation = Ssc::where('user_id', $user->id)->get()->first();
 
         $request->validate([
-            'ssc_school' => 'required|min:5|max:20',
-            'ssc_board' => 'required|min:5|max:20',
+            'ssc_school' => 'required|min:5|max:254',
+            'ssc_board' => 'required|min:5|max:254',
             'ssc_percentage' => 'required|size:2|digits:2',
-            'out_of' => 'required|size:2|digits:2',
-            'ssc_major' => 'required|min:5|max:20',
-            'ssc_langauge' => 'required|min:5|max:20',
+            'out_of' => 'required',
+            'ssc_major' => 'required|min:5|max:254',
+            'ssc_langauge' => 'required|min:5|max:254',
             'school_year_form' => 'required|size:4|digits:4',
             'school_year_to' => 'required|size:4|digits:4',
         ]);
