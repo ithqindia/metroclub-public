@@ -11,8 +11,13 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationGraduationController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
         $request->validate([
             'graduation_college' => 'required|min:5|max:254',
             'graduation_university' => 'required|min:5|max:254',
@@ -27,7 +32,7 @@ class EducationalInformationGraduationController extends Controller
         ]);
 
         Graduation::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'graduation_college' => $request->get('graduation_college'),
             'graduation_university' => $request->get('graduation_university'),
             'graduation_aggregates' => $request->get('graduation_aggregates'),
@@ -40,25 +45,50 @@ class EducationalInformationGraduationController extends Controller
             'completion_status' => $request->get('completion_status'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/me/educational-information');
-    }
-
-    public function show()
-    {
-        $user = Auth::user();
-        $graduationInformation = Graduation::where('user_id', $user->id)->get()->first();
-        if ($graduationInformation) {
-            // If data is present then show data
-            return view('student.graduation-form', compact('user', 'graduationInformation'));
+        if (!$id) {
+            return redirect('/me/educational-information');
         } else {
-            // If no data is present then show form
-            return view('student.graduation-form', compact('user', 'graduationInformation'));
+            return redirect('/students');
         }
     }
 
-    public function update(Request $request)
+    public function show($id = null)
     {
-        $user = Auth::user();
+        $viewWhenDataAvailable = 'graduation';
+        $viewWhenDataNotAvailable = 'graduation-form';
+
+        if (!$id) {
+            $user = Auth::user();
+            $viewWhenDataAvailable = 'student.graduation-form';
+            $viewWhenDataNotAvailable = 'student.graduation-form';
+        } else {
+            $user = User::find($id);
+        }
+        $graduationInformation = Graduation::where('user_id', $user->id)->get()->first();
+        if ($graduationInformation) {
+            // If data is present then show data
+            return view($viewWhenDataAvailable, compact('user', 'graduationInformation'));
+        } else {
+            // If no data is present then show form
+            $actionUrl = "/students/$id/graduation-form";
+            return view($viewWhenDataNotAvailable, compact('user', 'actionUrl'));
+        }
+    }
+
+    public function edit($id) {
+        $actionUrl = "/students/$id/graduation-form";
+        $graduationInformation = Graduation::where('user_id', $id)->get()->first();
+        $user = User::find($id);
+        return view('graduation-form', compact('user', 'graduationInformation', 'actionUrl'));
+    }
+
+    public function update(Request $request, $id = null)
+    {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
         $graduationInformation = Graduation::where('user_id', $user->id)->get()->first();
         $request->validate([
             'graduation_college' => 'required|min:5|max:254',
@@ -86,6 +116,10 @@ class EducationalInformationGraduationController extends Controller
         $graduationInformation->completion_status = $request->get('completion_status');
         $graduationInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/me/educational-information');
+        if (!$id) {
+            return redirect('/me/educational-information');
+        } else {
+            return redirect('/students/' . $id);
+        }
     }
 }

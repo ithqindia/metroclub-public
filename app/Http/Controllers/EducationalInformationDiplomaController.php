@@ -10,8 +10,14 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationDiplomaController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
+
         $request->validate([
             'diploma_college' => 'required|min:5|max:254',
             'diploma_university' => 'required|min:5|max:254',
@@ -26,7 +32,7 @@ class EducationalInformationDiplomaController extends Controller
         ]);
 
         Diploma::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'diploma_college' => $request->get('diploma_college'),
             'diploma_university' => $request->get('diploma_university'),
             'diploma_aggregates' => $request->get('diploma_aggregates'),
@@ -39,26 +45,53 @@ class EducationalInformationDiplomaController extends Controller
             'completion_status' => $request->get('completion_status'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/me/educational-information');
+        // return redirect('/me/educational-information');
+        if (!$id) {
+            return redirect('/me/educational-information');
+        } else {
+            return redirect('/students');
+        }
 
     }
 
-    public function show()
+    public function show($id = null)
     {
-        $user = Auth::user();
+        $viewWhenDataAvailable = 'diploma';
+        $viewWhenDataNotAvailable = 'diploma-form';
+
+        if (!$id) {
+            $user = Auth::user();
+            $viewWhenDataAvailable = 'student.diploma-form';
+            $viewWhenDataNotAvailable = 'student.diploma-form';
+        } else {
+            $user = User::find($id);
+        }
+
         $diplomaInformation = Diploma::where('user_id', $user->id)->get()->first();
         if ($diplomaInformation) {
             // If data is present then show data
-            return view('student.diploma-form', compact('user', 'diplomaInformation'));
+            return view($viewWhenDataAvailable, compact('user', 'diplomaInformation'));
         } else {
             // If no data is present then show form
-            return view('student.diploma-form', compact('user', 'diplomaInformation'));
+            $actionUrl = "/students/$id/diploma-form";
+            return view($viewWhenDataNotAvailable, compact('user', 'actionUrl'));
         }
     }
 
-    public function update(Request $request)
+    public function edit($id) {
+        $actionUrl = "/students/$id/diploma-form";
+        $diplomaInformation = Diploma::where('user_id', $id)->get()->first();
+        $user = User::find($id);
+        return view('diploma-form', compact('user', 'diplomaInformation', 'actionUrl'));
+    }
+
+    public function update(Request $request, $id = null)
     {
-        $user = Auth::user();
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
         $diplomaInformation = Diploma::where('user_id', $user->id)->get()->first();
         $request->validate([
             'diploma_college' => 'required|min:5|max:254',
@@ -85,7 +118,10 @@ class EducationalInformationDiplomaController extends Controller
         $diplomaInformation->completion_status = $request->get('completion_status');
         $diplomaInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/me/educational-information');
-
+        if (!$id) {
+            return redirect('/me/educational-information');
+        } else {
+            return redirect('/students/' . $id);
+        }
     }
 }

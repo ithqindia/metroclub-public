@@ -11,8 +11,14 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationPostgraduationController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
+
         $request->validate([
             'post_graduation_college' => 'required|min:5|max:254',
             'post_graduation_university' => 'required|min:5|max:254',
@@ -27,7 +33,7 @@ class EducationalInformationPostgraduationController extends Controller
         ]);
 
         PostGraduation::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'post_graduation_college' => $request->get('post_graduation_college'),
             'post_graduation_university' => $request->get('post_graduation_university'),
             'post_graduation_aggregates' => $request->get('post_graduation_aggregates'),
@@ -40,25 +46,50 @@ class EducationalInformationPostgraduationController extends Controller
             'completion_status' => $request->get('completion_status'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/me/educational-information');
-    }
-
-    public function show()
-    {
-        $user = Auth::user();
-        $postGraduationInformation = PostGraduation::where('user_id', $user->id)->get()->first();
-        if ($postGraduationInformation) {
-            // If data is present then show data
-            return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
+        if (!$id) {
+            return redirect('/me/educational-information');
         } else {
-            // If no data is present then show form
-            return view('student.post-graduation-form', compact('user', 'postGraduationInformation'));
+            return redirect('/students');
         }
     }
 
-    public function update(Request $request)
+    public function show($id = null)
     {
-        $user = Auth::user();
+        $viewWhenDataAvailable = 'postGraduation';
+        $viewWhenDataNotAvailable = 'post-graduation-form';
+
+        if (!$id) {
+            $user = Auth::user();
+            $viewWhenDataAvailable = 'student.post-graduation-form';
+            $viewWhenDataNotAvailable = 'student.post-graduation-form';
+        } else {
+            $user = User::find($id);
+        }
+        $postGraduationInformation = PostGraduation::where('user_id', $user->id)->get()->first();
+        if ($postGraduationInformation) {
+            // If data is present then show data
+            return view($viewWhenDataAvailable, compact('user', 'postGraduationInformation'));
+        } else {
+            // If no data is present then show form
+            $actionUrl = "/students/$id/post-graduation-form";
+            return view($viewWhenDataNotAvailable, compact('user', 'actionUrl'));
+        }
+    }
+
+    public function edit($id) {
+        $actionUrl = "/students/$id/post-graduation-form";
+        $postGraduationInformation = PostGraduation::where('user_id', $id)->get()->first();
+        $user = User::find($id);
+        return view('post-graduation-form', compact('user', 'postGraduationInformation', 'actionUrl'));
+    }
+
+    public function update(Request $request, $id = null)
+    {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
         $postGraduationInformation = PostGraduation::where('user_id', $user->id)->get()->first();
         $request->validate([
             'post_graduation_college' => 'required|min:5|max:254',
@@ -86,6 +117,10 @@ class EducationalInformationPostgraduationController extends Controller
         $postGraduationInformation->completion_status = $request->get('completion_status');
         $postGraduationInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/me/educational-information');
+        if (!$id) {
+            return redirect('/me/educational-information');
+        } else {
+            return redirect('/students/' . $id);
+        }
     }
 }

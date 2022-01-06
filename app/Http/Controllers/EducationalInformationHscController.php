@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class EducationalInformationHscController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
         $request->validate([
             'hsc_college' => 'required|min:5|max:254',
             'hsc_board' => 'required|min:5|max:254',
@@ -24,7 +29,7 @@ class EducationalInformationHscController extends Controller
         ]);
 
         Hsc::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user->id,
             'hsc_college' => $request->get('hsc_college'),
             'hsc_board' => $request->get('hsc_board'),
             'hsc_percentage' => $request->get('hsc_percentage'),
@@ -35,25 +40,50 @@ class EducationalInformationHscController extends Controller
             'hsc_year_to' => $request->get('hsc_year_to'),
         ]);
         Session::flash('message', 'Data added successfully !');
-        return redirect('/me/educational-information');
-    }
-
-    public function show()
-    {
-        $user = Auth::user();
-        $hscInformation = Hsc::where('user_id', $user->id)->get()->first();
-        if ($hscInformation) {
-            // If data is present then show data
-            return view('student.hsc-form', compact('user', 'hscInformation'));
+        if (!$id) {
+            return redirect('/me/educational-information');
         } else {
-            // If no data is present then show form
-            return view('student.hsc-form', compact('user', 'hscInformation'));
+            return redirect('/students');
         }
     }
 
-    public function update(Request $request)
+    public function show($id = null)
     {
-        $user = Auth::user();
+        $viewWhenDataAvailable = 'hsc';
+        $viewWhenDataNotAvailable = 'hsc-form';
+
+        if (!$id) {
+            $user = Auth::user();
+            $viewWhenDataAvailable = 'student.hsc-form';
+            $viewWhenDataNotAvailable = 'student.hsc-form';
+        } else {
+            $user = User::find($id);
+        }
+        $hscInformation = Hsc::where('user_id', $user->id)->get()->first();
+        if ($hscInformation) {
+            // If data is present then show data
+            return view($viewWhenDataAvailable, compact('user', 'hscInformation'));
+        } else {
+            // If no data is present then show form
+            $actionUrl = "/students/$id/hsc-form";
+            return view($viewWhenDataNotAvailable, compact('user', 'actionUrl'));
+        }
+    }
+
+    public function edit($id) {
+        $actionUrl = "/students/$id/hsc-form";
+        $hscInformation = Hsc::where('user_id', $id)->get()->first();
+        $user = User::find($id);
+        return view('hsc-form', compact('user', 'hscInformation', 'actionUrl'));
+    }
+
+    public function update(Request $request, $id = null)
+    {
+        if (!$id) {
+            $user = Auth::user();
+        } else {
+            $user = User::find($id);
+        }
         $hscInformation = Hsc::where('user_id', $user->id)->get()->first();
         $request->validate([
             'hsc_college' => 'required|min:5|max:254',
@@ -77,6 +107,10 @@ class EducationalInformationHscController extends Controller
         $hscInformation->hsc_year_to = $request->get('hsc_year_to');
         $hscInformation->save();
         Session::flash('message', 'Data Updated successfully !');
-        return redirect('/me/educational-information');
+        if (!$id) {
+            return redirect('/me/educational-information');
+        } else {
+            return redirect('/students/' . $id);
+        }
     }
 }
