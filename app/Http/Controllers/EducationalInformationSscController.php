@@ -51,12 +51,12 @@ class EducationalInformationSscController extends Controller
     public function show($id = null)
     {
         $viewWhenDataAvailable = 'ssc';
-        $viewWhenDataNotAvailable = 'education-form';
+        $viewWhenDataNotAvailable = 'ssc-form';
 
         if (!$id) {
             $user = Auth::user();
-            $viewWhenDataAvailable = 'student.education-form';
-            $viewWhenDataNotAvailable = 'student.education-form';
+            $viewWhenDataAvailable = 'student.ssc-form';
+            $viewWhenDataNotAvailable = 'student.ssc-form';
         } else {
             $user = User::find($id);
         }
@@ -65,16 +65,16 @@ class EducationalInformationSscController extends Controller
             return view($viewWhenDataAvailable, compact('user', 'sscInformation'));
         } else {
             // If no data is present then show empty form
-            $actionUrl = "/students/$id/education-form";
+            $actionUrl = "/students/$id/ssc-form";
             return view($viewWhenDataNotAvailable, compact('user', 'actionUrl'));
         }
     }
 
     public function edit($id) {
-        $actionUrl = "/students/$id/education-form";
+        $actionUrl = "/students/$id/ssc-form";
         $sscInformation = Ssc::where('user_id', $id)->get()->first();
         $user = User::find($id);
-        return view('education-form', compact('user', 'sscInformation', 'actionUrl'));
+        return view('ssc-form', compact('user', 'sscInformation', 'actionUrl'));
     }
 
     public function update(Request $request, $id = null)
