@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login Register - {{ env('APP_NAME') }}</title>
+    <title>@yield('title') - {{ env('APP_NAME') }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="en_US" />
@@ -19,8 +19,27 @@
 
 <body id="kt_body" class="bg-body">
 
-    @section('main-content')
-    @show
+    <div class="d-flex flex-column flex-root">
+        <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
+            style="background-image: url(/img/login-bg.png)">
+            <div class="d-flex flex-center flex-column flex-column-fluid p-5 pb-lg-5">
+                <a href="/" class="mb-5">
+                    <img alt="Logo" src="/logos/logo.png" class="h-100px" />
+                </a>
+
+                @section('main-content')
+                @show
+
+                <div class="d-flex flex-center flex-column-auto p-10">
+                    <div class="d-flex align-items-center fw-bold fs-6">
+                        <a href="/" class="text-muted text-hover-primary px-2">Home</a>
+                        <a href="/about" class="text-muted text-hover-primary px-2">About</a>
+                        <a href="/contact-us" class="text-muted text-hover-primary px-2">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         var hostUrl = "/";
