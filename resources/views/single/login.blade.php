@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('single.layout.main')
 
-<head>
-    <title>Login Register - {{ env('APP_NAME') }}</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <link rel="icon" type="image/png" href="/logos/favicon.png" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    <link rel="preload" href="/dist/js/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="/dist/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    {{-- <link href="{{ mix('/dist/css/style.css') }}" rel="stylesheet" type="text/css" /> --}}
-    <link href="{{ mix('/dist/css/custom.css') }}" rel="stylesheet" type="text/css" />
-    @section('styles')
-    @show
-</head>
-
-<body id="kt_body" class="bg-body">
+@section('main-content')
     <div class="d-flex flex-column flex-root">
         <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed"
             style="background-image: url(/img/login-bg.png)">
@@ -49,8 +32,8 @@
                             <div class="row fv-row mb-7">
                                 <div class="col-xl-12">
                                     <label class="form-label fw-bolder text-dark fs-6">Your name</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="text"
-                                        name="name" autocomplete="off" />
+                                    <input class="form-control form-control-lg form-control-solid" type="text" name="name"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                             <div class="fv-row mb-7">
@@ -71,8 +54,7 @@
                                             <i class="bi bi-eye fs-2 d-none"></i>
                                         </span>
                                     </div>
-                                    <div class="d-flex align-items-center mb-3"
-                                        data-kt-password-meter-control="highlight">
+                                    <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
                                         <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2">
                                         </div>
                                         <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2">
@@ -115,8 +97,8 @@
                                 </div>
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
                                     <label class="form-label fs-6 fw-bolder text-dark">Email</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="text"
-                                        name="email" autocomplete="off">
+                                    <input class="form-control form-control-lg form-control-solid" type="text" name="email"
+                                        autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <div class="fv-row mb-10 fv-plugins-icon-container">
@@ -147,12 +129,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        var hostUrl = "/";
-    </script>
-    <script src="/dist/js/plugins/global/plugins.bundle.js"></script>
-    <script src="/dist/js/scripts.bundle.js"></script>
-</body>
-
-</html>
+@endsection
