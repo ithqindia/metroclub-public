@@ -1,3 +1,4 @@
+@section('title', 'Verify Your Email Address')
 @extends('single.layout.main')
 
 @section('main-content')
@@ -12,28 +13,24 @@
             id="kt_password_reset_form" action="{{ route('password.email') }}" method="post">
             @csrf
             <div class="text-center mb-10">
-                <h1 class="text-dark mb-3">Forgot Password ?</h1>
-                <div class="text-gray-400 fw-bold fs-4">Enter your email to reset your password.</div>
+                <h1 class="text-dark mb-3">Verify Your Email Address</h1>
+                {{ __('Before proceeding, please check your email for a verification link.') }}
+                {{ __('If you did not receive the email') }},
+
             </div>
-            <div class="fv-row mb-10 fv-plugins-icon-container fv-plugins-bootstrap5-row-valid">
-                <label class="form-label fw-bolder text-gray-900 fs-6">Email</label>
-                <input class="form-control form-control-solid" type="email" placeholder="" name="email" autocomplete="off">
-            </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+            @if (session('resent'))
+                <div class="alert alert-success" role="alert">
+                    {{ __('A fresh verification link has been sent to your email address.') }}
                 </div>
             @endif
             <div class="d-flex flex-wrap justify-content-center pb-lg-0">
-                <button type="submit" class="btn btn-lg btn-primary fw-bolder me-4">
-                    <span class="indicator-label">{{ __('Reset Password') }}</span>
-                    <span class="indicator-progress">Please wait...
-                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                </button>
+                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline"></button>.
+                    <button type="submit" class="btn btn-lg btn-primary fw-bolder me-4">
+                        <span class="indicator-label">{{ __('click here to request another') }}</span>
+                    </button>
+                </form>
             </div>
         </form>
     </div>

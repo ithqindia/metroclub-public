@@ -6,7 +6,7 @@
         <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_new_password_form"
             method="POST" action="{{ route('password.update') }}">
             @csrf
-            {{-- <input type="hidden" name="token" value="{{ $token }}"> --}}
+            <input type="hidden" name="token" value="{{ $token }}">
 
             <div class="text-center mb-10">
                 <h1 class="text-dark mb-3">Setup New Password</h1>
