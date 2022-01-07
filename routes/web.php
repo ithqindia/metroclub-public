@@ -8,8 +8,9 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UniversityController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -33,7 +34,7 @@ Route::get('/vue2', function () {
 
 Route::get('/test2', function () {
     return view('frontend.test2');
-});
+})->middleware('verified');;
 
 Route::get('/search', function () {
     return view('frontend.search');
@@ -52,6 +53,12 @@ Route::resource(
     ['only' => ['index', 'show']]
 );
 
-Route::get('/login-route', function () {
-    return view('single.login');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return view('auth.verified');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+Route::get('/vf', function () {
+    return view('auth.verified');
 });

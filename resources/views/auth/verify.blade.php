@@ -10,13 +10,14 @@
         @endif
 
         <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate"
-            id="kt_password_reset_form" action="{{ route('password.email') }}" method="post">
+            id="kt_password_reset_form" action="{{ route('verification.resend') }}" method="post">
             @csrf
             <div class="text-center mb-10">
                 <h1 class="text-dark mb-3">Verify Your Email Address</h1>
-                {{ __('Before proceeding, please check your email for a verification link.') }}
-                {{ __('If you did not receive the email') }},
-
+                <div class="fs-3 fw-bold text-muted mb-10">
+                    <p>We have sent an email to you <br />Please follow a link to verify your email.</p>
+                    <p>Did't receive an email?</p>
+                </div>
             </div>
             @if (session('resent'))
                 <div class="alert alert-success" role="alert">
@@ -28,7 +29,7 @@
                     @csrf
                     <button type="submit" class="btn btn-link p-0 m-0 align-baseline"></button>.
                     <button type="submit" class="btn btn-lg btn-primary fw-bolder me-4">
-                        <span class="indicator-label">{{ __('click here to request another') }}</span>
+                        <span class="indicator-label">Click to resend</span>
                     </button>
                 </form>
             </div>
